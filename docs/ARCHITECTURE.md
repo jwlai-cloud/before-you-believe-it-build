@@ -11,7 +11,9 @@ Before You Believe It is a dependency-free static web prototype for a 5–7 minu
 | `index.html` | Semantic five-stage activity, accessible controls, and receipt structure. | Fetch data, call AI, grade a child, or retain personal data remotely. |
 | `styles.css` | Responsive 2D reasoning canvas, print layout, and reduced-motion support. | Supply mission content or make reasoning decisions. |
 | `app.js` | Deterministic stage transitions, selections, receipt assembly, session-only persistence, copy, and print behavior. | Evaluate the answer or transmit it anywhere. |
+| `mission-state.js` | Pure mission-state transitions, answer assembly, and receipt transforms shared by the browser UI and unit tests. | Read or write the DOM, browser storage, or network. |
 | `check.js` | Minimal structural regression check for the required activity and receipt controls. | Replace live-browser accessibility or visual testing. |
+| `test/` | Unit coverage for state outcomes and a Playwright browser smoke test for the full mission flow. | Replace human content review or external deployment checks. |
 | Static MissionPack (embedded) | Supplies the Floating City claim, challenge cards, scaffolds, and parent prompt. | Adapt content dynamically or cite live sources. |
 
 ## Data flow
@@ -26,6 +28,7 @@ Before You Believe It is a dependency-free static web prototype for a 5–7 minu
 ## External dependencies
 
 - Optional Google Fonts stylesheet for DM Sans, DM Mono, and Fraunces. System font fallbacks preserve usability when it is unavailable.
+- Playwright 1.59.0 is a development-only dependency for browser verification, declared in `requirements-dev.txt`; it is not shipped to users.
 - No AI SDK, analytics, database, authentication service, or API key is used by the current build.
 
 ## Deployment topology
@@ -40,5 +43,5 @@ A future server-side Mission Director may coordinate Inquiry Designer, Skeptic, 
 
 - One preset mission only; evidence cards are reasoning prompts, not live research citations.
 - No multi-device saving, accounts, or parent dashboard.
-- Live-browser visual, keyboard, and accessibility-tree checks are still required before submission because DevTools automation is not configured in this workspace.
+- The browser smoke test covers runtime flow, console errors, responsive overflow, session restore, reset, copy fallback, and reduced motion. A human accessibility review remains valuable before final submission.
 - Copy depends on browser clipboard permission; print opens the browser’s normal print flow.

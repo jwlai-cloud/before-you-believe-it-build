@@ -45,3 +45,21 @@
 **The specific parts used today:** None in runtime code. The shape is documented in `README.md` and `docs/ARCHITECTURE.md` for a future, validated build.
 
 **What surprised us / what we'd tell someone learning this:** The useful technical constraint is not merely “put the model on the server”; it is validating what the model is allowed to produce before the child ever sees it.
+
+---
+
+## Node test runner and Playwright browser checks
+
+**What it actually does:** The Node test runner proves deterministic state behavior in milliseconds. Playwright drives an isolated Chromium browser against an ephemeral local server to verify the actual HTML, CSS, browser storage, and DOM interactions together.
+
+**Why we chose it over alternatives:** The prototype has a small state model that benefits from unit tests, but responsive layouts and browser-only APIs such as the Clipboard API need runtime coverage. This combines both levels without adding a production dependency.
+
+**The specific parts used:** Node's `node:test` and strict assertions; Playwright Python's Chromium launch, locators, responsive viewports, console listener, reduced-motion context, reload, and click/fill/select interactions.
+
+**What surprised us / what we'd tell someone learning this:** Browser engines may serialize the same CSS duration differently (`0.01ms` becomes `1e-05s` in Chromium). Assertions should test the semantic threshold rather than a browser-specific string representation.
+
+**Primary sources used while building:**
+
+- [Node.js test runner](https://nodejs.org/api/test.html) — built-in unit test APIs.
+- [Playwright Python: writing tests](https://playwright.dev/python/docs/writing-tests) — isolated browser contexts and locators.
+- [Playwright Python: emulation](https://playwright.dev/python/docs/emulation) — viewport and reduced-motion configuration.

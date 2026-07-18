@@ -17,10 +17,12 @@ Success means a judge can complete the preset Floating City mission without an A
 
 ```bash
 npm run start
+npm test
+npm run test:browser
 npm run check
 ```
 
-`npm run start` serves the current directory on port 4173. `npm run check` runs JavaScript syntax checks and the structural regression check.
+`npm run start` serves the current directory on port 4173. `npm test` runs the pure mission-state unit suite. `npm run test:browser` launches its own temporary static server and runs the Playwright browser smoke test. `npm run check` runs JavaScript syntax checks and the structural regression check. Before first browser run, install `requirements-dev.txt` and run `playwright install chromium`.
 
 ## Project structure
 
@@ -28,7 +30,10 @@ npm run check
 index.html                  Activity structure and accessible controls
 styles.css                  Responsive, motion, and print presentation
 app.js                      Deterministic activity state and receipt actions
+mission-state.js            Pure state transitions and receipt transforms
 check.js                    Lightweight regression check
+test/                       Unit and browser smoke tests
+requirements-dev.txt        Pinned test-only browser dependency
 README.md                   Run instructions, demo narrative, future AI flow
 docs/                       Architecture, decisions, progress, learning, spec
 ```
@@ -45,9 +50,9 @@ function saveProgress() {
 
 ## Testing strategy
 
-- Always run `npm run check` and `git diff --check` before a commit.
-- Perform manual browser checks at 320px, 768px, 1024px, and 1440px before release.
-- In browser verification, confirm a clean console, keyboard navigation, live announcements, reduced motion, receipt copy fallback, and print layout.
+- Always run `npm test`, `npm run test:browser`, `npm run check`, and `git diff --check` before a commit.
+- The browser smoke test verifies the full mission, refresh persistence, reset, console cleanliness, copy fallback, reduced motion, and no horizontal overflow at 320px, 768px, 1024px, and 1440px.
+- Perform a human visual/accessibility review of keyboard order, live announcements, and print layout before release.
 - Add a structural regression token to `check.js` when adding an essential activity or receipt control.
 
 ## Boundaries
@@ -62,7 +67,7 @@ function saveProgress() {
 - The receipt separates child contribution, AI help, evidence checked, uncertainty, and a parent question.
 - Refresh preserves only the active session’s activity state; Start over clears it.
 - The receipt can be copied or printed/saved, with a visible fallback when copy is unavailable.
-- `npm run check` and `git diff --check` pass.
+- `npm test`, `npm run test:browser`, `npm run check`, and `git diff --check` pass.
 - Protected `main` accepts only passing PRs from `dev`.
 
 ## Open questions

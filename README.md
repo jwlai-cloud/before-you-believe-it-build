@@ -15,6 +15,15 @@ npm run start
 npm run check
 ```
 
+For the full test suite, install the browser-test dependency once, then run:
+
+```bash
+python3 -m pip install -r requirements-dev.txt
+playwright install chromium
+npm test
+npm run test:browser
+```
+
 ## What to demo (about 90 seconds)
 
 1. Open the Floating City mission and read the AI helper’s deliberately plausible claim.
@@ -64,4 +73,6 @@ Suggested `MissionPack` contract: `mission`, `claim`, `choicePrompts`, `assumpti
 - `index.html` — accessible activity structure
 - `styles.css` — responsive canvas and purposeful CSS motion
 - `app.js` — deterministic mission state and receipt assembly
+- `mission-state.js` — testable mission-state transitions and receipt transforms
+- `test/` — unit tests and a self-contained browser smoke test
 - `check.js` — lightweight structural regression check
