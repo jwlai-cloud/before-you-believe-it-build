@@ -1,0 +1,10 @@
+{
+  "name": "before-you-believe-it-build-week",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A static Build Week Education prototype",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "check": "node --check app.js && node --check check.js && node check.js"
+  }
+}

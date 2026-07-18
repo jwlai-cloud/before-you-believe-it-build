@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A parent-and-child reasoning activity for using AI with care." />
+    <title>Before You Believe It</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mission">Skip to activity</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#mission" aria-label="Before You Believe It home">
+          <span class="brand-mark" aria-hidden="true">?</span>
+          <span>Before You<br /><em>Believe It</em></span>
+        </a>
+        <div class="mission-meta">
+          <span class="eyebrow">Weekend field guide</span>
+          <span class="time"><span aria-hidden="true">◷</span> 6 min together</span>
+        </div>
+        <button class="quiet-button" id="restart" type="button">Start over</button>
+      </header>
+
+      <main id="mission" class="mission-layout" tabindex="-1">
+        <nav class="path" aria-label="Mission path">
+          <p class="path-label">Our path</p>
+          <ol>
+            <li><button class="path-step active" type="button" data-step="0"><span>01</span><strong>Think</strong><small>Meet the claim</small></button></li>
+            <li><button class="path-step" type="button" data-step="1"><span>02</span><strong>Push back</strong><small>Find the gap</small></button></li>
+            <li><button class="path-step" type="button" data-step="2"><span>03</span><strong>Check</strong><small>Look closer</small></button></li>
+            <li><button class="path-step" type="button" data-step="3"><span>04</span><strong>Make</strong><small>Build an answer</small></button></li>
+            <li><button class="path-step" type="button" data-step="4"><span>05</span><strong>Own</strong><small>Keep the receipt</small></button></li>
+          </ol>
+          <p class="path-note">No scores here. Just a trail you can retrace.</p>
+        </nav>
+
+        <section class="canvas" aria-labelledby="mission-title">
+          <div class="canvas-topline">
+            <span class="mission-chip">MISSION 01 · THE FLOATING CITY</span>
+            <span class="step-count" id="step-count">STEP 1 OF 5</span>
+          </div>
+
+          <section class="stage active" data-stage="0" aria-labelledby="mission-title" tabindex="-1">
+            <div class="stage-copy">
+              <p class="kicker">Think first</p>
+              <h1 id="mission-title">A clever answer<br />needs a <i>second look.</i></h1>
+              <p class="lede">An AI helper made a confident claim about a city in the clouds. Before we agree, what do <em>you</em> notice?</p>
+            </div>
+            <div class="claim-board" aria-label="AI claim">
+              <div class="ai-stamp"><span aria-hidden="true">✦</span> AI helper’s draft</div>
+              <blockquote>“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
+              <div class="claim-footer"><span>PLAUSIBLE, BUT UNPROVEN</span><span class="curve-arrow" aria-hidden="true">↘</span></div>
+            </div>
+            <fieldset class="choice-fieldset">
+              <legend>What makes you pause?</legend>
+              <div class="choice-grid">
+                <button class="choice-card" type="button" data-think="How would a floating city get power and water?"><span class="choice-index">A</span><span>How would it get power and water?</span></button>
+                <button class="choice-card" type="button" data-think="Would it really leave the land below untouched?"><span class="choice-index">B</span><span>Would it really leave the land below untouched?</span></button>
+                <button class="choice-card" type="button" data-think="Who gets to live there, and who does not?"><span class="choice-index">C</span><span>Who gets to live there — and who doesn’t?</span></button>
+              </div>
+              <p class="selection-note" id="think-note" aria-live="polite">Choose the question that pulls at you.</p>
+            </fieldset>
+          </section>
+
+          <section class="stage" data-stage="1" aria-labelledby="push-title" tabindex="-1" hidden>
+            <div class="stage-copy split-head">
+              <div><p class="kicker">Push back gently</p><h2 id="push-title">Every confident claim<br />stands on something.</h2></div>
+              <p class="lede">Tap the part that feels like it might be doing too much work.</p>
+            </div>
+            <div class="split-claim" aria-label="Claim split into parts">
+              <button class="claim-part" type="button" data-assumption="surface"><span>Floating cities</span><small>What is floating? How high?</small></button>
+              <span class="operator" aria-hidden="true">+</span>
+              <button class="claim-part selected" type="button" data-assumption="untouched"><span>leave all land</span><small>What counts as ‘untouched’?</small></button>
+              <span class="operator" aria-hidden="true">+</span>
+              <button class="claim-part" type="button" data-assumption="better"><span>are better</span><small>Better for whom, and how?</small></button>
+            </div>
+            <aside class="assumption-card" id="assumption-card" aria-live="polite">
+              <span class="pin" aria-hidden="true">✦</span>
+              <p class="eyebrow">A hidden assumption</p>
+              <h3>“Untouched” means no effects at all.</h3>
+              <p>But a city can cast shade, need anchors, and send waste somewhere — even if it floats.</p>
+            </aside>
+            <div class="parent-prompt"><span aria-hidden="true">↳</span><p><strong>Parent nudge:</strong> “What would have to be true for this sentence to work?”</p></div>
+          </section>
+
+          <section class="stage" data-stage="2" aria-labelledby="check-title" tabindex="-1" hidden>
+            <div class="stage-copy split-head">
+              <div><p class="kicker">Check the view</p><h2 id="check-title">Let’s put the claim<br />next to some evidence.</h2></div>
+              <p class="lede">These are clues, not a verdict. Which one changes your thinking?</p>
+            </div>
+            <div class="evidence-workspace">
+              <article class="mini-claim"><p class="eyebrow">THE CLAIM</p><strong>“Better for the planet.”</strong><span>?</span></article>
+              <div class="evidence-cards">
+                <button class="evidence-card chosen" type="button" data-evidence="A floating platform needs materials, energy and maintenance — each has environmental impacts."><span class="evidence-type">SYSTEMS CLUE</span><h3>Floating does not mean impact-free.</h3><p>Platforms still need energy, materials and repairs.</p><span class="use-clue">This helps me check the claim <b>↗</b></span></button>
+                <button class="evidence-card" type="button" data-evidence="A city can affect the people and ecosystems around it even when it is built above the ground."><span class="evidence-type rust">ANOTHER VIEW</span><h3>“Untouched” can hide who is affected.</h3><p>Air, shade, access and waste can travel beyond a city’s edge.</p><span class="use-clue">This changes the word “all” <b>↗</b></span></button>
+                <button class="evidence-card" type="button" data-evidence="People may disagree about what 'better' means: land use, fairness, biodiversity or climate can lead to different answers."><span class="evidence-type blue">QUESTION</span><h3>Better by which measure?</h3><p>Land use? Fairness? Biodiversity? Climate?</p><span class="use-clue">This asks for a measure <b>↗</b></span></button>
+              </div>
+              <svg class="evidence-link" viewBox="0 0 800 330" preserveAspectRatio="none" aria-hidden="true"><path id="evidence-path" d="M 190 165 C 270 165, 300 70, 395 70" /></svg>
+            </div>
+            <p class="check-note" id="check-note" aria-live="polite">A first clue is already linked. You can compare the others too.</p>
+          </section>
+
+          <section class="stage" data-stage="3" aria-labelledby="make-title" tabindex="-1" hidden>
+            <div class="stage-copy split-head">
+              <div><p class="kicker">Make something true to your thinking</p><h2 id="make-title">Now build a more<br /><i>careful</i> answer.</h2></div>
+              <p class="lede">There is no model answer. Use the pieces that feel honest to you.</p>
+            </div>
+            <div class="maker-grid">
+              <form class="answer-builder" id="answer-builder">
+                <label for="opening">Start with what you think</label>
+                <select id="opening" name="opening"><option>I’m not sure floating cities are automatically better because…</option><option>Floating cities could help in some ways, but…</option><option>I would need more information before I said…</option></select>
+                <label for="reason">Add one reason</label>
+                <select id="reason" name="reason"><option>they still need energy, materials and maintenance.</option><option>“untouched” does not mean nothing else is affected.</option><option>we need to decide what “better” means first.</option></select>
+                <label for="question">End with your own question</label>
+                <input id="question" name="question" maxlength="100" value="Who would be helped, and who could be left out?" />
+              </form>
+              <article class="answer-preview" aria-labelledby="answer-label"><p class="eyebrow" id="answer-label">YOUR WORKING ANSWER</p><p id="answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance. I’d still ask: Who would be helped, and who could be left out?</p><span class="draft-mark">draft · yours to revise</span></article>
+            </div>
+            <p class="make-note">Your answer can stay unfinished. Thoughtful answers often do.</p>
+          </section>
+
+          <section class="stage" data-stage="4" aria-labelledby="own-title" tabindex="-1" hidden>
+            <div class="receipt-heading"><p class="kicker">Own the trail</p><h2 id="own-title">A small record of how<br />you got here.</h2><p class="lede">Keep the ideas separate: what came from you, what AI helped with, and what is still open.</p></div>
+            <article class="receipt" aria-label="Learning receipt">
+              <div class="receipt-top"><span class="brand-mark small" aria-hidden="true">?</span><div><p class="eyebrow">LEARNING RECEIPT</p><strong>The floating city question</strong></div><time datetime="2026-07-18">WEEKEND MISSION</time></div>
+              <dl>
+                <div><dt>YOU CONTRIBUTED</dt><dd id="receipt-think">A question about whether the land would really be untouched.</dd></div>
+                <div><dt>AI HELPED BY</dt><dd>Writing the first claim and offering challenge cards. It did not decide the answer.</dd></div>
+                <div><dt>YOU CHECKED</dt><dd id="receipt-evidence">Floating platforms still need energy, materials and maintenance.</dd></div>
+                <div><dt>STILL UNCERTAIN</dt><dd>Which environmental effects would matter most — and for whom?</dd></div>
+              </dl>
+              <div class="receipt-answer"><span>YOUR WORKING ANSWER</span><p id="receipt-answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance.</p></div>
+            </article>
+            <aside class="takeaway"><span aria-hidden="true">☼</span><p><strong>Ask together:</strong> “What would you want to check next if you had a whole afternoon?”</p></aside>
+          </section>
+
+          <footer class="canvas-footer">
+            <button class="back-button" id="back" type="button" disabled>← Back</button>
+            <p id="progress-message" aria-live="polite">Take your time. There isn’t a right click.</p>
+            <button class="next-button" id="next" type="button">Continue <span aria-hidden="true">→</span></button>
+          </footer>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
