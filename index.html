@@ -50,6 +50,35 @@
               <h1 id="mission-title">A clever answer<br />needs a <i>second look.</i></h1>
               <p class="lede">An AI helper made a confident claim about a city in the clouds. Before we agree, what do <em>you</em> notice?</p>
             </div>
+            <section class="live-mission" aria-labelledby="live-mission-title">
+              <div class="live-mission-copy">
+                <p class="eyebrow">LIVE GPT · OPTIONAL</p>
+                <h2 id="live-mission-title">Bring a topic to the canvas.</h2>
+                <p>GPT-5.6 can prepare a fresh claim and reasoning clues. A parent enters the topic; the child’s answer stays on this device.</p>
+              </div>
+              <form class="judge-access-form" id="judge-access-form">
+                <label for="judge-access-code">Judge access code</label>
+                <input id="judge-access-code" name="code" type="password" autocomplete="off" required />
+                <button type="submit" id="judge-access-submit">Unlock live GPT <span aria-hidden="true">↗</span></button>
+              </form>
+              <form class="live-mission-form" id="live-mission-form" hidden>
+                <label for="live-topic">A topic to explore</label>
+                <input id="live-topic" name="topic" maxlength="80" placeholder="e.g. school gardens" required />
+                <label for="live-age-band">Age band</label>
+                <select id="live-age-band" name="ageBand"><option value="8-10">8–10</option><option value="11-13">11–13</option></select>
+                <button type="submit" id="live-mission-submit">Prepare a live challenge <span aria-hidden="true">↗</span></button>
+              </form>
+              <p class="live-mission-status" id="live-mission-status" aria-live="polite">The preset Floating City mission works without live GPT.</p>
+              <article class="live-mission-result" id="live-mission-result" aria-label="Live GPT reasoning challenge" tabindex="-1" hidden>
+                <div class="live-result-top"><span>LIVE REASONING CHALLENGE</span><strong id="live-topic-label"></strong></div>
+                <blockquote id="live-claim"></blockquote>
+                <p class="live-pause" id="live-pause-question"></p>
+                <div class="live-assumption"><span>HIDDEN ASSUMPTION</span><strong id="live-assumption-label"></strong><p id="live-assumption-note"></p></div>
+                <ul class="live-evidence-list" id="live-evidence-list" aria-label="Live reasoning clues"></ul>
+                <p class="live-parent-prompt"><strong>Parent nudge:</strong> <span id="live-parent-prompt"></span></p>
+                <p class="live-uncertainty"><strong>Still open:</strong> <span id="live-uncertainty"></span></p>
+              </article>
+            </section>
             <div class="claim-board" aria-label="AI claim">
               <div class="ai-stamp"><span aria-hidden="true">✦</span> AI helper’s draft</div>
               <blockquote>“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
@@ -116,7 +145,8 @@
                 <label for="reason">Add one reason</label>
                 <select id="reason" name="reason"><option>they still need energy, materials and maintenance.</option><option>“untouched” does not mean nothing else is affected.</option><option>we need to decide what “better” means first.</option></select>
                 <label for="question">End with your own question</label>
-                <input id="question" name="question" maxlength="100" value="Who would be helped, and who could be left out?" />
+                <input id="question" name="question" maxlength="100" value="Who would be helped, and who could be left out?" aria-describedby="answer-memory" />
+                <p class="field-note" id="answer-memory">This stays on this device while you explore. It is not sent to AI.</p>
               </form>
               <article class="answer-preview" aria-labelledby="answer-label"><p class="eyebrow" id="answer-label">YOUR WORKING ANSWER</p><p id="answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance. I’d still ask: Who would be helped, and who could be left out?</p><span class="draft-mark">draft · yours to revise</span></article>
             </div>
@@ -134,6 +164,15 @@
                 <div><dt>STILL UNCERTAIN</dt><dd>Which environmental effects would matter most — and for whom?</dd></div>
               </dl>
               <div class="receipt-answer"><span>YOUR WORKING ANSWER</span><p id="receipt-answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance.</p></div>
+              <div class="receipt-practice" aria-label="What we practised">
+                <span>WHAT YOU PRACTISED</span>
+                <ul><li>Noticing a claim</li><li>Finding an assumption</li><li>Keeping a question open</li></ul>
+              </div>
+              <div class="receipt-actions">
+                <button class="receipt-button" id="copy-receipt" type="button">Copy working answer</button>
+                <button class="receipt-button primary" id="print-receipt" type="button">Print / save receipt</button>
+              </div>
+              <p class="receipt-action-status" id="receipt-action-status" aria-live="polite"></p>
             </article>
             <aside class="takeaway"><span aria-hidden="true">☼</span><p><strong>Ask together:</strong> “What would you want to check next if you had a whole afternoon?”</p></aside>
           </section>
@@ -141,11 +180,12 @@
           <footer class="canvas-footer">
             <button class="back-button" id="back" type="button" disabled>← Back</button>
             <p id="progress-message" aria-live="polite">Take your time. There isn’t a right click.</p>
-            <button class="next-button" id="next" type="button">Continue <span aria-hidden="true">→</span></button>
+            <button class="next-button" id="next" type="button"><span id="next-label">Continue</span> <span id="next-icon" aria-hidden="true">→</span></button>
           </footer>
         </section>
       </main>
     </div>
+    <script src="mission-state.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -5,6 +5,8 @@
   "description": "A static Build Week Education prototype",
   "scripts": {
     "start": "python3 -m http.server 4173",
-    "check": "node --check app.js && node --check check.js && node check.js"
+    "test": "node --test test/*.test.js",
+    "test:browser": "python3 test/browser_check.py",
+    "check": "node --check mission-state.js && node --check live-challenge.js && node --check demo-access.js && node --check api/demo-access.js && node --check api/live-challenge.js && node --check app.js && node --check check.js && node check.js"
   }
 }
