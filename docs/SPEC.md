@@ -44,7 +44,7 @@ Use small, named functions for state transitions and browser boundaries. Keep mi
 
 ```js
 function saveProgress() {
-  sessionStorage.setItem(storageKey, JSON.stringify({ current, thinking, evidence }));
+  sessionStorage.setItem(storageKey, JSON.stringify({ current, thinkChoice, evidenceChoice, answer }));
 }
 ```
 
