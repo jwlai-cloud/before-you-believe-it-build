@@ -20,4 +20,4 @@ We will ship the first mission as a fully bundled, deterministic MissionPack ren
 
 ## Consequences
 
-The demo is stable, inexpensive to host, and easy to inspect. It is limited to one mission until a validated server-side MissionPack pipeline is built. Future content generation needs schema, provenance, age-appropriateness, and non-judgement validation before it can replace the preset.
+The demo is stable, inexpensive to host, and easy to inspect. It is limited to one mission until a validated server-side MissionPack pipeline is built. Future content generation needs schema, provenance, age-appropriateness, and non-judgment validation before it can replace the preset.

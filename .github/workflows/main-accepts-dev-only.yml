@@ -3,6 +3,8 @@ name: Main accepts dev PRs only
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [dev]
 
 jobs:
   dev-is-the-source:
@@ -12,9 +14,10 @@ jobs:
       - name: Require dev as the pull request source
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ "$HEAD_BRANCH" != "dev" ]; then
+          if [ "$EVENT_NAME" = "pull_request" ] && [ "$HEAD_BRANCH" != "dev" ]; then
             echo "Pull requests into main must come from dev; received: $HEAD_BRANCH"
             exit 1
           fi
-          echo "Approved source branch: dev"
+          echo "Approved event/source: $EVENT_NAME ${HEAD_BRANCH:-dev}"

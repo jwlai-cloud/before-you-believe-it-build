@@ -38,7 +38,7 @@
 
 ## Future validated MissionPack pipeline
 
-**What it actually does:** This is an architecture boundary, not a live integration. A future server-side manager would coordinate specialised agents and release only a schema- and policy-validated MissionPack to the static renderer.
+**What it actually does:** This is an architecture boundary, not a live integration. A future server-side manager would coordinate specialized agents and release only a schema- and policy-validated MissionPack to the static renderer.
 
 **Why we chose it over alternatives:** Separating creation from rendering lets the product remain reliable and makes “AI helps, child owns the reasoning” enforceable in the system design.
 

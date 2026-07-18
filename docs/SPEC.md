@@ -2,7 +2,7 @@
 
 ## Objective
 
-Deliver a reliable 5–7 minute parent-and-child web activity that teaches a child to form answers with AI in the room. The child should be able to trace their own thinking through Think → Push back → Check → Make → Own, with no scores, diagnoses, rankings, or AI judgement.
+Deliver a reliable 5–7 minute parent-and-child web activity that teaches a child to form answers with AI in the room. The child should be able to trace their own thinking through Think → Push back → Check → Make → Own, with no scores, diagnoses, rankings, or AI judgment.
 
 Success means a judge can complete the preset Floating City mission without an API key, see the clear separation between child work and AI help, and leave with a printable Learning Receipt.
 

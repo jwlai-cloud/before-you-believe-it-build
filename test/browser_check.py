@@ -65,9 +65,18 @@ def run_browser_checks(base_url):
         assert "Would it really leave the land below untouched?" in page.locator("#receipt-think").inner_text()
         assert "people and ecosystems" in page.locator("#receipt-evidence").inner_text()
         assert "Where would the energy come from?" in page.locator("#receipt-answer-text").inner_text()
+        assert page.locator("#copy-receipt").is_visible()
+        assert page.locator("#print-receipt").is_visible()
         page.locator("#copy-receipt").click()
         page.wait_for_function("document.querySelector('#receipt-action-status').textContent.trim().length > 0")
         assert page.locator("#receipt-action-status").inner_text()
+        page.evaluate("""() => Object.defineProperty(navigator, 'clipboard', {
+            configurable: true,
+            value: { writeText: () => Promise.reject(new Error('copy failed')) }
+        })""")
+        page.locator("#copy-receipt").click()
+        page.wait_for_function("document.querySelector('#receipt-action-status').textContent.includes('Copy is unavailable here')")
+        assert "Copy is unavailable here" in page.locator("#receipt-action-status").inner_text()
 
         page.locator("#restart").click()
         assert page.locator("[data-stage='0']").is_visible()

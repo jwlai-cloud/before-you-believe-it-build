@@ -21,7 +21,7 @@ Before You Believe It is a dependency-free static web prototype for a 5–7 minu
 1. Parent and child open the static page in a modern browser.
 2. The browser renders the bundled Floating City mission; no network or model call is needed for activity content.
 3. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
-4. The browser stores the current stage, selections, and answer in `sessionStorage` for the active browser session only.
+4. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
 5. The Own stage assembles a Learning Receipt from those values and allows copying or printing it.
 6. Starting over clears the session-only mission state.
 

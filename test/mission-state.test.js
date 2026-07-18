@@ -4,10 +4,14 @@ const {
   createMissionState,
   selectEvidence,
   selectThink,
+  serialiseMissionState,
   buildWorkingAnswer,
   receiptFromState,
   resetMissionState,
-  restoreMissionState
+  restoreMissionState,
+  defaultAnswer,
+  defaultEvidence,
+  defaultThinking
 } = require('../mission-state.js');
 
 test('selectThink records the child question without evaluating it', () => {
@@ -54,6 +58,24 @@ test('restoreMissionState rejects an out-of-range stage and keeps a valid saved 
   assert.equal(restored.thinkChoice, 'How would it get power and water?');
 });
 
+test('restoreMissionState safely defaults malformed saved values', () => {
+  for (const saved of [null, undefined, 'not a saved mission']) {
+    const restored = restoreMissionState(saved);
+    assert.equal(restored.current, 0);
+    assert.equal(restored.thinking, defaultThinking);
+    assert.equal(restored.evidence, defaultEvidence);
+  }
+});
+
+test('restoreMissionState preserves valid stage and partial answer values', () => {
+  const restored = restoreMissionState({ current: 2, answer: { question: 'What would happen in a storm?' } });
+
+  assert.equal(restored.current, 2);
+  assert.equal(restored.answer.opening, defaultAnswer.opening);
+  assert.equal(restored.answer.reason, defaultAnswer.reason);
+  assert.equal(restored.answer.question, 'What would happen in a storm?');
+});
+
 test('resetMissionState clears prior choices and returns to the first stage', () => {
   const selected = selectEvidence(
     selectThink(createMissionState(), 'How would it get power and water?'),
@@ -72,4 +94,42 @@ test('a new mission starts with the visible first evidence clue selected', () =>
 
   assert.equal(state.evidenceChoice, 'A floating platform needs materials, energy and maintenance — each has environmental impacts.');
   assert.equal(state.evidence, state.evidenceChoice);
+});
+
+test('empty selections fall back to neutral default mission material', () => {
+  const withEmptyThink = selectThink(createMissionState(), '   ');
+  const withEmptyEvidence = selectEvidence(withEmptyThink, undefined);
+
+  assert.equal(withEmptyEvidence.thinkChoice, '');
+  assert.equal(withEmptyEvidence.thinking, defaultThinking);
+  assert.equal(withEmptyEvidence.evidence, defaultEvidence);
+  assert.equal(withEmptyEvidence.evidenceChoice, defaultEvidence);
+});
+
+test('buildWorkingAnswer normalises missing and malformed fields', () => {
+  const defaulted = buildWorkingAnswer();
+  const partial = buildWorkingAnswer({ question: 'Could it be safer?' });
+  const malformed = buildWorkingAnswer({ opening: null, reason: 42, question: 'Could it be fair?' });
+
+  assert.match(defaulted, /I’d still ask:/);
+  assert.match(partial, /Could it be safer\?/);
+  assert.match(malformed, /Could it be fair\?/);
+  assert.doesNotMatch(malformed, /null|undefined|42/);
+});
+
+test('serialiseMissionState keeps only values required to restore a mission', () => {
+  const state = selectEvidence(
+    selectThink(createMissionState(), 'How would it get power and water?'),
+    'A city can affect the people and ecosystems around it even when it is built above the ground.'
+  );
+  const persisted = serialiseMissionState({ ...state, current: 3 });
+
+  assert.deepEqual(persisted, {
+    current: 3,
+    thinkChoice: 'How would it get power and water?',
+    evidenceChoice: 'A city can affect the people and ecosystems around it even when it is built above the ground.',
+    answer: defaultAnswer
+  });
+  assert.equal('thinking' in persisted, false);
+  assert.equal('evidence' in persisted, false);
 });

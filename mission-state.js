@@ -26,13 +26,15 @@
 
   function createMissionState(overrides = {}) {
     const thinkChoice = safeText(overrides.thinkChoice, '');
-    const evidence = safeText(overrides.evidence, defaultEvidence);
+    const savedEvidence = safeText(overrides.evidence, '');
+    const evidenceChoice = safeText(overrides.evidenceChoice, savedEvidence || defaultEvidence);
+    const evidence = savedEvidence || evidenceChoice;
     return {
       current: Number.isInteger(overrides.current) && overrides.current >= 0 && overrides.current < STAGE_COUNT ? overrides.current : 0,
       thinking: thinkChoice ? `You noticed: “${thinkChoice}”` : safeText(overrides.thinking, defaultThinking),
       evidence,
       thinkChoice,
-      evidenceChoice: safeText(overrides.evidenceChoice, evidence),
+      evidenceChoice,
       answer: normaliseAnswer(overrides.answer || overrides)
     };
   }
@@ -55,6 +57,16 @@
 
   function resetMissionState() {
     return createMissionState();
+  }
+
+  function serialiseMissionState(state) {
+    const restored = restoreMissionState(state);
+    return {
+      current: restored.current,
+      thinkChoice: restored.thinkChoice,
+      evidenceChoice: restored.evidenceChoice,
+      answer: { ...restored.answer }
+    };
   }
 
   function buildWorkingAnswer(answer) {
@@ -83,6 +95,7 @@
     selectEvidence,
     updateAnswer,
     resetMissionState,
+    serialiseMissionState,
     buildWorkingAnswer,
     receiptFromState
   };

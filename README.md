@@ -59,7 +59,7 @@ Mission Director (server-side manager)
 MissionPack validator
  ├── schema + age/reading-level checks
  ├── provenance and evidence requirements
- ├── forbid scoring, diagnosis, persuasion, and answer judgement
+├── forbid scoring, diagnosis, persuasion, and answer judgment
  └── apply human-reviewed safety/editorial rules
             │
             ▼
