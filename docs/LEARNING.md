@@ -36,15 +36,21 @@
 
 ---
 
-## Future validated MissionPack pipeline
+## Server-side live GPT challenge
 
-**What it actually does:** This is an architecture boundary, not a live integration. A future server-side manager would coordinate specialized agents and release only a schema- and policy-validated MissionPack to the static renderer.
+**What it actually does:** The optional Vercel function receives a general topic and age band from a parent, calls GPT-5.6 through the Responses API, then returns a strict JSON reasoning challenge. The browser never receives an API key and never sends the child’s working answer.
 
-**Why we chose it over alternatives:** Separating creation from rendering lets the product remain reliable and makes “AI helps, child owns the reasoning” enforceable in the system design.
+**Why we chose it over alternatives:** Structured Outputs bounds the browser contract, while a serverless function keeps credentials out of client JavaScript. The static MissionPack remains usable when live GPT is unavailable.
 
-**The specific parts used today:** None in runtime code. The shape is documented in `README.md` and `docs/ARCHITECTURE.md` for a future, validated build.
+**The specific parts used today:** `POST /api/live-challenge`, the Responses API, `gpt-5.6` by default, low reasoning effort, strict JSON Schema, server-side `OPENAI_API_KEY`, and manual output validation before rendering.
 
-**What surprised us / what we'd tell someone learning this:** The useful technical constraint is not merely “put the model on the server”; it is validating what the model is allowed to produce before the child ever sees it.
+**What surprised us / what we'd tell someone learning this:** The useful technical constraint is not merely “put the model on the server”; it is validating what the model is allowed to produce before the child ever sees it. GPT-5.6 supports the Responses API and structured outputs, while the Agents SDK’s manager-as-tools pattern remains the clean next step for the three-specialist Mission Director.
+
+**Primary sources used while building:**
+
+- [GPT-5.6 model](https://developers.openai.com/api/docs/models/gpt-5.6-sol) — model alias and Responses API support.
+- [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs) — strict JSON Schema with `text.format`.
+- [Agents SDK quickstart](https://developers.openai.com/api/docs/guides/agents/quickstart) and [orchestration](https://developers.openai.com/api/docs/guides/agents/orchestration) — the future Mission Director manager pattern.
 
 ---
 

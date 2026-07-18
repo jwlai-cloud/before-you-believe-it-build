@@ -2,15 +2,17 @@
 
 ## Summary
 
-Before You Believe It is a dependency-free static web prototype for a 5–7 minute parent-and-child reasoning activity. A child moves through a fixed mission—Think, Push back, Check, Make, and Own—while the interface keeps the child’s contribution, AI assistance, evidence, and uncertainty visibly separate.
+Before You Believe It is a 5–7 minute parent-and-child reasoning activity with a bundled five-step mission and an optional, server-side live GPT challenge. A child moves through Think, Push back, Check, Make, and Own while the interface keeps the child’s contribution, AI assistance, evidence, and uncertainty visibly separate.
 
 ## Components
 
 | Component | Responsibility | Does not do |
 | --- | --- | --- |
-| `index.html` | Semantic five-stage activity, accessible controls, and receipt structure. | Fetch data, call AI, grade a child, or retain personal data remotely. |
+| `index.html` | Semantic five-stage activity, accessible controls, receipt structure, and live-topic form. | Hold an API key or send the child’s answer to AI. |
 | `styles.css` | Responsive 2D reasoning canvas, print layout, and reduced-motion support. | Supply mission content or make reasoning decisions. |
-| `app.js` | Deterministic stage transitions, selections, receipt assembly, session-only persistence, copy, and print behavior. | Evaluate the answer or transmit it anywhere. |
+| `app.js` | Deterministic stage transitions, selections, receipt assembly, session-only persistence, copy/print, and safe rendering of a live challenge. | Evaluate the answer or transmit it anywhere. |
+| `api/live-challenge.js` | Vercel serverless boundary: validates a parent topic, calls GPT-5.6, and returns a safe JSON result. | Expose `OPENAI_API_KEY`, retain a child’s answer, or decide the child’s conclusion. |
+| `live-challenge.js` | Validates inputs/model output and builds the schema-constrained Responses API request. | Render browser UI or accept arbitrary model output. |
 | `mission-state.js` | Pure mission-state transitions, answer assembly, and receipt transforms shared by the browser UI and unit tests. | Read or write the DOM, browser storage, or network. |
 | `check.js` | Minimal structural regression check for the required activity and receipt controls. | Replace live-browser accessibility or visual testing. |
 | `test/` | Unit coverage for state outcomes and a Playwright browser smoke test for the full mission flow. | Replace human content review or external deployment checks. |
@@ -18,30 +20,32 @@ Before You Believe It is a dependency-free static web prototype for a 5–7 minu
 
 ## Data flow
 
-1. Parent and child open the static page in a modern browser.
-2. The browser renders the bundled Floating City mission; no network or model call is needed for activity content.
-3. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
-4. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
-5. The Own stage assembles a Learning Receipt from those values and allows copying or printing it.
-6. Starting over clears the session-only mission state.
+1. Parent and child open the bundled Floating City mission; no network or model call is needed for the core activity.
+2. Optionally, a parent submits a general topic and age band to the same-origin Vercel function. The child’s answer is never sent.
+3. The function calls GPT-5.6 through the Responses API with a strict JSON schema; malformed output is rejected before the browser receives it.
+4. `app.js` renders the live claim, assumption, clues, parent prompt, and uncertainty using DOM text nodes. If live GPT fails, the preset mission remains usable.
+5. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
+6. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
+7. The Own stage assembles a Learning Receipt from those values and allows copying or printing it. Starting over clears session-only state.
 
 ## External dependencies
 
 - Optional Google Fonts stylesheet for DM Sans, DM Mono, and Fraunces. System font fallbacks preserve usability when it is unavailable.
 - Playwright 1.59.0 is a development-only dependency for browser verification, declared in `requirements-dev.txt`; it is not shipped to users.
-- No AI SDK, analytics, database, authentication service, or API key is used by the current build.
+- The deployed live path uses the built-in `fetch` API to call the OpenAI Responses API; it adds no production npm dependency.
+- `OPENAI_API_KEY` and optional `OPENAI_MODEL` live only in Vercel environment variables. No analytics, database, or authentication service is used.
 
 ## Deployment topology
 
-The prototype is static HTML, CSS, and JavaScript. It can be served by any HTTPS static host. Local development uses Python’s built-in static server through `npm run start`; there is no always-on server, database, or billable backend.
+The preset is static HTML, CSS, and JavaScript. Vercel additionally serves `api/live-challenge.js` as a short-lived serverless function. Local development uses Python’s built-in static server through `npm run start`, so it intentionally exercises the preset fallback rather than live GPT.
 
 ## Future AI boundary
 
-A future server-side Mission Director may coordinate Inquiry Designer, Skeptic, and Evidence Guardian agents to create a validated `MissionPack`. The browser must receive only a validated pack and a bundled fallback must remain available. The future system must not score, diagnose, rank, or judge children.
+The live baseline is one schema-constrained GPT-5.6 call. A future server-side Mission Director may use the Agents SDK’s manager-as-tools pattern to coordinate Inquiry Designer, Skeptic, and Evidence Guardian agents, then validate a full `MissionPack` before release. The browser must receive only validated material and keep the bundled fallback. Neither path may score, diagnose, rank, or judge children.
 
 ## Known limitations / non-goals
 
-- One preset mission only; evidence cards are reasoning prompts, not live research citations.
+- One preset mission plus an optional live companion challenge; generated evidence cards are reasoning prompts, not live research citations.
 - No multi-device saving, accounts, or parent dashboard.
 - The browser smoke test covers runtime flow, console errors, responsive overflow, session restore, reset, copy fallback, and reduced motion. A human accessibility review remains valuable before final submission.
 - Copy depends on browser clipboard permission; print opens the browser’s normal print flow.

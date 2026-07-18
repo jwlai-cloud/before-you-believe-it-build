@@ -29,8 +29,29 @@ def run_browser_checks(base_url):
         console_errors = []
         page = browser.new_page(viewport={"width": 1024, "height": 900})
         page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
+        page.route("**/api/live-challenge", lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body='''{"challenge":{"topic":"School gardens","claim":"Every school should turn its oval into a food garden because gardens always help students and nature.","pause_question":"What would need to be true for always help to make sense?","assumption_label":"Every school faces the same conditions.","assumption_note":"Schools can have different space, water, time and community needs.","evidence_cards":[{"label":"SYSTEMS CLUE","title":"Gardens need care","detail":"A garden needs water, tools, time and people to look after it."},{"label":"ANOTHER VIEW","title":"Space can be shared","detail":"A school oval can be used for sport, play, shade or growing food."},{"label":"QUESTION","title":"Helpful for whom?","detail":"Different students may value different uses of the space."}],"parent_prompt":"What would we want to learn before deciding?","uncertainty":"Which choice would be fairest for this particular school?"}}'''
+        ))
         page.goto(base_url, wait_until="networkidle")
 
+        assert page.locator("#mission-title").is_visible()
+        assert page.locator("#live-mission-form").is_visible()
+        page.locator("#live-topic").fill("School gardens")
+        page.locator("#live-mission-form button").click()
+        page.wait_for_function("document.querySelector('#live-mission-result').hidden === false")
+        assert "Every school should" in page.locator("#live-claim").inner_text()
+        assert page.locator("#live-evidence-list li").count() == 3
+        page.unroute("**/api/live-challenge")
+        page.route("**/api/live-challenge", lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body='{"error":"Live GPT is unavailable. The preset mission is ready to use."}'
+        ))
+        page.locator("#live-topic").fill("School gardens again")
+        page.locator("#live-mission-form button").click()
+        page.wait_for_function("document.querySelector('#live-mission-status').textContent.includes('unavailable')")
         assert page.locator("#mission-title").is_visible()
         assert page.locator("[aria-live='polite']").count() >= 3
         assert page.locator(".path-step[aria-current='step']").inner_text().startswith("01")

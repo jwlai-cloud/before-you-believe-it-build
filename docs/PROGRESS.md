@@ -17,21 +17,20 @@
 
 ### In progress (not done)
 
-- The PR-review hardening is pushed to `dev` in `e788d5f`; GitHub review checks are refreshing on PR #1.
+- Adding an optional server-side live GPT challenge path for the Vercel hackathon demo; the preset mission stays available as a no-key fallback.
 
 ### Next (priority order)
 
-1. Review the refreshed PR checks and comments, then merge the `dev` → `main` PR once required checks permit it.
-2. Deploy the merged static site to Vercel for a post-deployment browser pass.
+1. Commit and push the verified live GPT path to the existing `dev` → `main` PR, then review refreshed bot feedback.
+2. Deploy `dev` to Vercel with `OPENAI_API_KEY` and perform a live hosted GPT verification.
 4. Perform a human accessibility/content review before final submission.
 5. Only after the core demo is proven, specify a server-side validated MissionPack pipeline for future GPT-5.6 agent orchestration.
 
 ### Open questions / blocked on
 
-- Vercel is the planned static host after the PR is reviewed and merged.
-- Is live GPT-5.6 orchestration in scope for this hackathon submission, or should the documented architecture remain a clearly labelled future path?
+- Vercel needs `OPENAI_API_KEY` (and access to the configured `OPENAI_MODEL`) for the optional live challenge.
 - Does the project need a second mission before submission, or is one polished mission the intended scope? The current spec accepts one polished mission.
 
 ### Changed since last entry
 
-- The Learning Receipt now functions as a handoff artifact with session-only state, copy, and print actions. State persistence is minimized to values needed for restoration; receipt text remains derived locally. The core state suite and full browser smoke test are green. The core static-MissionPack decision is recorded in [ADR 0001](adr/0001-use-a-static-mission-pack-for-the-demo.md).
+- The Live GPT Mission Lab calls a same-origin Vercel function with only a parent topic and age band. The function uses GPT-5.6 Structured Outputs, validates its response, and the frontend renders the resulting claim/clues as text nodes. Unit tests cover the request/schema/endpoint fallback; the browser test mocks the endpoint and verifies the rendered live challenge. The static MissionPack remains the core fallback; the live decision is recorded in [ADR 0002](adr/0002-add-server-side-live-gpt-challenge.md).

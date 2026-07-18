@@ -11,6 +11,10 @@ const printReceipt = document.querySelector('#print-receipt');
 const receiptStatus = document.querySelector('#receipt-action-status');
 const nextLabel = document.querySelector('#next-label');
 const nextIcon = document.querySelector('#next-icon');
+const liveMissionForm = document.querySelector('#live-mission-form');
+const liveMissionStatus = document.querySelector('#live-mission-status');
+const liveMissionResult = document.querySelector('#live-mission-result');
+const liveMissionSubmit = document.querySelector('#live-mission-submit');
 const storageKey = 'before-you-believe-it:floating-city';
 const stageLabels = ['Meet the claim', 'Find the hidden assumption', 'Compare evidence', 'Build your answer', 'Read your receipt'];
 const nextLabels = ['Push back', 'Check it', 'Make an answer', 'See receipt', 'Start again'];
@@ -30,6 +34,45 @@ function saveProgress() {
     sessionStorage.setItem(storageKey, JSON.stringify(serialiseMissionState(state)));
   } catch {
     // The mission remains usable when browser storage is unavailable.
+  }
+}
+
+function setLiveMissionStatus(message, isError = false) {
+  if (!liveMissionStatus) return;
+  liveMissionStatus.textContent = message;
+  liveMissionStatus.classList.toggle('error', isError);
+}
+
+function setText(selector, text) {
+  const element = document.querySelector(selector);
+  if (element) element.textContent = text;
+}
+
+function renderLiveMission(challenge) {
+  setText('#live-topic-label', challenge.topic);
+  setText('#live-claim', `“${challenge.claim}”`);
+  setText('#live-pause-question', challenge.pause_question);
+  setText('#live-assumption-label', challenge.assumption_label);
+  setText('#live-assumption-note', challenge.assumption_note);
+  setText('#live-parent-prompt', challenge.parent_prompt);
+  setText('#live-uncertainty', challenge.uncertainty);
+  const evidenceList = document.querySelector('#live-evidence-list');
+  if (evidenceList) {
+    evidenceList.replaceChildren(...challenge.evidence_cards.map((card) => {
+      const item = document.createElement('li');
+      const label = document.createElement('span');
+      const title = document.createElement('strong');
+      const detail = document.createElement('p');
+      label.textContent = card.label;
+      title.textContent = card.title;
+      detail.textContent = card.detail;
+      item.append(label, title, detail);
+      return item;
+    }));
+  }
+  if (liveMissionResult) {
+    liveMissionResult.hidden = false;
+    liveMissionResult.focus();
   }
 }
 
@@ -159,6 +202,32 @@ copyReceipt?.addEventListener('click', async () => {
   }
 });
 printReceipt?.addEventListener('click', () => window.print());
+liveMissionForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const topic = document.querySelector('#live-topic')?.value.trim() || '';
+  const ageBand = document.querySelector('#live-age-band')?.value || '';
+  if (!topic) {
+    setLiveMissionStatus('Add a short topic first.', true);
+    return;
+  }
+  if (liveMissionSubmit) liveMissionSubmit.disabled = true;
+  setLiveMissionStatus('GPT-5.6 is preparing challenge material…');
+  try {
+    const response = await fetch('/api/live-challenge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic, ageBand })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload?.challenge) throw new Error(payload?.error || 'Live GPT is unavailable.');
+    renderLiveMission(payload.challenge);
+    setLiveMissionStatus('Live challenge ready. These are clues to explore, not a verdict.');
+  } catch {
+    setLiveMissionStatus('Live GPT is unavailable right now. The preset mission is ready to use.', true);
+  } finally {
+    if (liveMissionSubmit) liveMissionSubmit.disabled = false;
+  }
+});
 
 setAnswerValues(state.answer);
 restoreSelections();
