@@ -31,6 +31,7 @@ The product point: AI belongs in the room as a material-preparer and reasoning c
 - Keyboard-operable controls, visible focus states, semantic headings/labels, live announcements, responsive layouts, and reduced-motion support are built in.
 - The persistent path tracks the activity without points, streaks, levels, or a “correct answer.”
 - The current mission is a reliable static `MissionPack`; everything works offline after the first browser font load (and remains usable with system-font fallback).
+- The child’s selected question, checked clue, and working answer are held in browser session storage only, so a refresh does not erase the conversation. The receipt can be copied or printed/saved as a PDF.
 
 ## Future server-side GPT-5.6 Agents SDK flow
 

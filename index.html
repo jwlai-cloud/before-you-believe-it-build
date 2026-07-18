@@ -116,7 +116,8 @@
                 <label for="reason">Add one reason</label>
                 <select id="reason" name="reason"><option>they still need energy, materials and maintenance.</option><option>“untouched” does not mean nothing else is affected.</option><option>we need to decide what “better” means first.</option></select>
                 <label for="question">End with your own question</label>
-                <input id="question" name="question" maxlength="100" value="Who would be helped, and who could be left out?" />
+                <input id="question" name="question" maxlength="100" value="Who would be helped, and who could be left out?" aria-describedby="answer-memory" />
+                <p class="field-note" id="answer-memory">This stays on this device while you explore. It is not sent to AI.</p>
               </form>
               <article class="answer-preview" aria-labelledby="answer-label"><p class="eyebrow" id="answer-label">YOUR WORKING ANSWER</p><p id="answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance. I’d still ask: Who would be helped, and who could be left out?</p><span class="draft-mark">draft · yours to revise</span></article>
             </div>
@@ -134,6 +135,15 @@
                 <div><dt>STILL UNCERTAIN</dt><dd>Which environmental effects would matter most — and for whom?</dd></div>
               </dl>
               <div class="receipt-answer"><span>YOUR WORKING ANSWER</span><p id="receipt-answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance.</p></div>
+              <div class="receipt-practice" aria-label="What we practised">
+                <span>WHAT YOU PRACTISED</span>
+                <ul><li>Noticing a claim</li><li>Finding an assumption</li><li>Keeping a question open</li></ul>
+              </div>
+              <div class="receipt-actions">
+                <button class="receipt-button" id="copy-receipt" type="button">Copy working answer</button>
+                <button class="receipt-button primary" id="print-receipt" type="button">Print / save receipt</button>
+              </div>
+              <p class="receipt-action-status" id="receipt-action-status" aria-live="polite"></p>
             </article>
             <aside class="takeaway"><span aria-hidden="true">☼</span><p><strong>Ask together:</strong> “What would you want to check next if you had a whole afternoon?”</p></aside>
           </section>
