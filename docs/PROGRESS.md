@@ -17,11 +17,11 @@
 
 ### In progress (not done)
 
-- Addressing the open PR’s automated review findings; the implementation and test changes are verified locally and ready to commit to `dev`.
+- The PR-review hardening is pushed to `dev` in `e788d5f`; GitHub review checks are refreshing on PR #1.
 
 ### Next (priority order)
 
-1. Commit and push the verified PR-review hardening to the existing `dev` → `main` PR, then wait for checks to refresh.
+1. Review the refreshed PR checks and comments, then merge the `dev` → `main` PR once required checks permit it.
 2. Deploy the merged static site to Vercel for a post-deployment browser pass.
 4. Perform a human accessibility/content review before final submission.
 5. Only after the core demo is proven, specify a server-side validated MissionPack pipeline for future GPT-5.6 agent orchestration.
