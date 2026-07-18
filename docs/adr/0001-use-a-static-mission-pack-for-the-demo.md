@@ -12,6 +12,10 @@ The Build Week prototype must work reliably in a live judge demo without an API 
 
 We will ship the first mission as a fully bundled, deterministic MissionPack rendered by static HTML, CSS, and JavaScript. Any future GPT-5.6 Agents SDK orchestration will run server-side, validate output before release, and preserve this static pack as a fallback.
 
+## Amendment — optional live companion
+
+ADR 0002 supersedes the earlier rejection of server-side generation only for an optional, validated live-GPT companion path. The static MissionPack remains the core demo and the required no-key fallback.
+
 ## Alternatives considered
 
 - **Direct browser model calls:** rejected because they require an API key in the client, make demos dependent on network/runtime behavior, and blur the boundary between the child’s work and AI output.

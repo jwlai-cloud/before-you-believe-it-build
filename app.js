@@ -257,6 +257,7 @@ liveMissionForm?.addEventListener('submit', async (event) => {
     return;
   }
   if (liveMissionSubmit) liveMissionSubmit.disabled = true;
+  if (liveMissionResult) liveMissionResult.hidden = true;
   setLiveMissionStatus('GPT-5.6 is preparing challenge material…');
   try {
     const response = await fetch('/api/live-challenge', {
@@ -266,11 +267,16 @@ liveMissionForm?.addEventListener('submit', async (event) => {
       body: JSON.stringify({ topic, ageBand })
     });
     const payload = await response.json();
+    if (response.status === 401) {
+      setLiveMissionAccess(false);
+      setLiveMissionStatus('Judge access expired. Enter the access code again.', true);
+      return;
+    }
     if (!response.ok || !payload?.challenge) throw new Error(payload?.error || 'Live GPT is unavailable.');
     renderLiveMission(payload.challenge);
     setLiveMissionStatus('Live challenge ready. These are clues to explore, not a verdict.');
-  } catch {
-    setLiveMissionStatus('Live GPT is unavailable right now. The preset mission is ready to use.', true);
+  } catch (error) {
+    setLiveMissionStatus(error.message || 'Live GPT is unavailable right now. The preset mission is ready to use.', true);
   } finally {
     if (liveMissionSubmit) liveMissionSubmit.disabled = false;
   }

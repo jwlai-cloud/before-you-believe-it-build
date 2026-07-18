@@ -30,7 +30,11 @@ def run_browser_checks(base_url):
         console_errors = []
         page = context.new_page()
         page.set_viewport_size({"width": 1024, "height": 900})
-        page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
+        expected_console_errors = {
+            "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+            "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+        }
+        page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" and message.text not in expected_console_errors else None)
         context.route("**/api/live-challenge", lambda route: route.fulfill(
             status=200,
             content_type="application/json",
@@ -60,7 +64,22 @@ def run_browser_checks(base_url):
         assert page.locator("#live-evidence-list li").count() == 3
         context.unroute("**/api/live-challenge")
         context.route("**/api/live-challenge", lambda route: route.fulfill(
-            status=200,
+            status=401,
+            content_type="application/json",
+            body='{"error":"Judge access is required to prepare a live challenge."}'
+        ))
+        page.locator("#live-topic").fill("School gardens again")
+        page.locator("#live-mission-form button").click()
+        page.wait_for_function("document.querySelector('#live-mission-status').textContent.includes('expired')")
+        assert page.locator("#live-mission-result").is_hidden()
+        assert page.locator("#judge-access-form").is_visible()
+        assert page.locator("#live-mission-form").is_hidden()
+        page.locator("#judge-access-code").fill("judge-demo-token")
+        page.locator("#judge-access-form button").click()
+        page.wait_for_function("document.querySelector('#live-mission-form').hidden === false")
+        context.unroute("**/api/live-challenge")
+        context.route("**/api/live-challenge", lambda route: route.fulfill(
+            status=503,
             content_type="application/json",
             body='{"error":"Live GPT is unavailable. The preset mission is ready to use."}'
         ))
@@ -103,6 +122,9 @@ def run_browser_checks(base_url):
         assert "Where would the energy come from?" in page.locator("#receipt-answer-text").inner_text()
         assert page.locator("#copy-receipt").is_visible()
         assert page.locator("#print-receipt").is_visible()
+        page.evaluate("window.__printCalled = false; window.print = () => { window.__printCalled = true; };")
+        page.locator("#print-receipt").click()
+        assert page.evaluate("window.__printCalled")
         page.locator("#copy-receipt").click()
         page.wait_for_function("document.querySelector('#receipt-action-status').textContent.trim().length > 0")
         assert page.locator("#receipt-action-status").inner_text()

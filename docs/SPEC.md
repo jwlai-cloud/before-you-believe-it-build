@@ -9,7 +9,7 @@ Success means a judge can complete the preset Floating City mission without an A
 ## Tech stack
 
 - Static HTML, CSS, modern browser JavaScript, and a Vercel serverless endpoint.
-- A same-origin `POST /api/live-challenge` server boundary for GPT-5.6; no client-side key, database, or authentication.
+- A same-origin `POST /api/live-challenge` server boundary for GPT-5.6; no client-side key, database, user accounts, or third-party authentication; optional signed judge access requires the deployment's `DEMO_ACCESS_TOKEN` flow and signed HTTP-only cookie.
 - Optional Google Fonts with system-font fallbacks.
 - GitHub Actions only for repository branch-source protection.
 

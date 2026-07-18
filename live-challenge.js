@@ -1,6 +1,7 @@
 const AGE_BANDS = new Set(['8-10', '11-13']);
 const MAX_TOPIC_LENGTH = 80;
 const MAX_TEXT_LENGTH = 420;
+const LIVE_CHALLENGE_TIMEOUT_MS = 15_000;
 
 const challengeSchema = {
   type: 'object',
@@ -100,16 +101,24 @@ function extractOutputText(response) {
   throw new Error('Live GPT returned no structured challenge.');
 }
 
-async function requestLiveChallenge({ topic, ageBand, apiKey, fetchImpl = fetch, model = 'gpt-5.6' }) {
+async function requestLiveChallenge({ topic, ageBand, apiKey, fetchImpl = fetch, model = 'gpt-5.6', timeoutMs = LIVE_CHALLENGE_TIMEOUT_MS }) {
   if (!apiKey) throw new Error('Live GPT is not configured.');
-  const response = await fetchImpl('https://api.openai.com/v1/responses', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(buildLiveChallengeRequest({ topic, ageBand, model }))
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  let response;
+  try {
+    response = await fetchImpl('https://api.openai.com/v1/responses', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(buildLiveChallengeRequest({ topic, ageBand, model }))
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
   if (!response.ok) throw new Error('Live GPT could not prepare a challenge.');
 
   let payload;

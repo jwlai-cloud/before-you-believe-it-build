@@ -23,8 +23,8 @@
 
 1. Review the refreshed PR checks and comments, then merge the `dev` → `main` PR once required checks permit it.
 2. Deploy `dev` to Vercel with `OPENAI_API_KEY` and `DEMO_ACCESS_TOKEN`, then perform a live hosted GPT verification.
-4. Perform a human accessibility/content review before final submission.
-5. Only after the core demo is proven, specify a server-side validated MissionPack pipeline for future GPT-5.6 agent orchestration.
+3. Perform a human accessibility/content review before final submission.
+4. Only after the core demo is proven, specify a server-side validated MissionPack pipeline for future GPT-5.6 agent orchestration.
 
 ### Open questions / blocked on
 

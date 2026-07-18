@@ -64,7 +64,23 @@ test('requestLiveChallenge parses a structured Responses API result and never ne
   assert.deepEqual(challenge, validChallenge);
   assert.equal(calls[0].url, 'https://api.openai.com/v1/responses');
   assert.equal(calls[0].options.headers.Authorization, 'Bearer test-key');
+  assert.ok(calls[0].options.signal instanceof AbortSignal);
   assert.equal(JSON.parse(calls[0].options.body).model, 'gpt-5.6');
+});
+
+test('requestLiveChallenge aborts a slow upstream request', async () => {
+  await assert.rejects(
+    requestLiveChallenge({
+      topic: 'School gardens',
+      ageBand: '8-10',
+      apiKey: 'test-key',
+      timeoutMs: 1,
+      fetchImpl: async (_url, options) => new Promise((_resolve, reject) => {
+        options.signal.addEventListener('abort', () => reject(new Error('request timed out')));
+      })
+    }),
+    /timed out/
+  );
 });
 
 test('requestLiveChallenge rejects malformed model output instead of passing it to the browser', async () => {

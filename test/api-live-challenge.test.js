@@ -22,7 +22,13 @@ test('live challenge endpoint rejects non-POST methods', async () => {
   assert.equal(response.headers.Allow, 'POST');
 });
 
-test('live challenge endpoint rejects malformed parent input before an API call', async () => {
+test('live challenge endpoint rejects malformed parent input before an API call', async (t) => {
+  const previousToken = process.env.DEMO_ACCESS_TOKEN;
+  delete process.env.DEMO_ACCESS_TOKEN;
+  t.after(() => {
+    if (previousToken === undefined) delete process.env.DEMO_ACCESS_TOKEN;
+    else process.env.DEMO_ACCESS_TOKEN = previousToken;
+  });
   const response = createResponse();
   await liveChallengeHandler({ method: 'POST', body: { topic: '', ageBand: '8-10' } }, response);
 
