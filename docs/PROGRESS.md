@@ -17,11 +17,11 @@
 
 ### In progress (not done)
 
-- Adding an optional server-side live GPT challenge path for the Vercel hackathon demo; the preset mission stays available as a no-key fallback.
+- The optional live GPT challenge path is pushed to `dev` in `d74fc54`; PR #1 and bot checks are refreshing. The preset mission remains available as a no-key fallback.
 
 ### Next (priority order)
 
-1. Commit and push the verified live GPT path to the existing `dev` → `main` PR, then review refreshed bot feedback.
+1. Review the refreshed PR checks and comments, then merge the `dev` → `main` PR once required checks permit it.
 2. Deploy `dev` to Vercel with `OPENAI_API_KEY` and perform a live hosted GPT verification.
 4. Perform a human accessibility/content review before final submission.
 5. Only after the core demo is proven, specify a server-side validated MissionPack pipeline for future GPT-5.6 agent orchestration.
