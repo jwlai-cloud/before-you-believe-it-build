@@ -8,10 +8,11 @@ Before You Believe It is a 5–7 minute parent-and-child reasoning activity with
 
 | Component | Responsibility | Does not do |
 | --- | --- | --- |
-| `index.html` | Semantic five-stage activity, accessible controls, receipt structure, and live-topic form. | Hold an API key or send the child’s answer to AI. |
+| `index.html` | Semantic five-stage activity, accessible controls, receipt structure, judge-code form, and live-topic form. | Hold an API key or send the child’s answer to AI. |
 | `styles.css` | Responsive 2D reasoning canvas, print layout, and reduced-motion support. | Supply mission content or make reasoning decisions. |
 | `app.js` | Deterministic stage transitions, selections, receipt assembly, session-only persistence, copy/print, and safe rendering of a live challenge. | Evaluate the answer or transmit it anywhere. |
-| `api/live-challenge.js` | Vercel serverless boundary: validates a parent topic, calls GPT-5.6, and returns a safe JSON result. | Expose `OPENAI_API_KEY`, retain a child’s answer, or decide the child’s conclusion. |
+| `api/demo-access.js` + `demo-access.js` | Verifies the judge code and issues a two-hour signed, HTTP-only cookie. | Put the code in browser JavaScript or identify a child. |
+| `api/live-challenge.js` | Vercel serverless boundary: validates a parent topic, requires judge access, calls GPT-5.6, and returns a safe JSON result. | Expose `OPENAI_API_KEY`, retain a child’s answer, or decide the child’s conclusion. |
 | `live-challenge.js` | Validates inputs/model output and builds the schema-constrained Responses API request. | Render browser UI or accept arbitrary model output. |
 | `mission-state.js` | Pure mission-state transitions, answer assembly, and receipt transforms shared by the browser UI and unit tests. | Read or write the DOM, browser storage, or network. |
 | `check.js` | Minimal structural regression check for the required activity and receipt controls. | Replace live-browser accessibility or visual testing. |
@@ -21,23 +22,24 @@ Before You Believe It is a 5–7 minute parent-and-child reasoning activity with
 ## Data flow
 
 1. Parent and child open the bundled Floating City mission; no network or model call is needed for the core activity.
-2. Optionally, a parent submits a general topic and age band to the same-origin Vercel function. The child’s answer is never sent.
-3. The function calls GPT-5.6 through the Responses API with a strict JSON schema; malformed output is rejected before the browser receives it.
-4. `app.js` renders the live claim, assumption, clues, parent prompt, and uncertainty using DOM text nodes. If live GPT fails, the preset mission remains usable.
-5. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
-6. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
-7. The Own stage assembles a Learning Receipt from those values and allows copying or printing it. Starting over clears session-only state.
+2. For a live demo, a reviewer enters a server-configured judge code. The same-origin function issues a signed, HTTP-only cookie valid for two hours.
+3. An authorized parent submits a general topic and age band to the same-origin Vercel function. The child’s answer is never sent.
+4. The function calls GPT-5.6 through the Responses API with a strict JSON schema; malformed output is rejected before the browser receives it.
+5. `app.js` renders the live claim, assumption, clues, parent prompt, and uncertainty using DOM text nodes. If live GPT fails, the preset mission remains usable.
+6. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
+7. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
+8. The Own stage assembles a Learning Receipt from those values and allows copying or printing it. Starting over clears session-only state.
 
 ## External dependencies
 
 - Optional Google Fonts stylesheet for DM Sans, DM Mono, and Fraunces. System font fallbacks preserve usability when it is unavailable.
 - Playwright 1.59.0 is a development-only dependency for browser verification, declared in `requirements-dev.txt`; it is not shipped to users.
 - The deployed live path uses the built-in `fetch` API to call the OpenAI Responses API; it adds no production npm dependency.
-- `OPENAI_API_KEY` and optional `OPENAI_MODEL` live only in Vercel environment variables. No analytics, database, or authentication service is used.
+- `OPENAI_API_KEY`, optional `OPENAI_MODEL`, and `DEMO_ACCESS_TOKEN` live only in Vercel environment variables. No analytics, database, or third-party authentication service is used.
 
 ## Deployment topology
 
-The preset is static HTML, CSS, and JavaScript. Vercel additionally serves `api/live-challenge.js` as a short-lived serverless function. Local development uses Python’s built-in static server through `npm run start`, so it intentionally exercises the preset fallback rather than live GPT.
+The preset is static HTML, CSS, and JavaScript. Vercel additionally serves `api/demo-access.js` and `api/live-challenge.js` as short-lived serverless functions. Local development uses Python’s built-in static server through `npm run start`, so it intentionally exercises the preset fallback rather than live GPT.
 
 ## Future AI boundary
 

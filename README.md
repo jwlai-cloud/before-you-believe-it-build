@@ -29,10 +29,11 @@ npm run test:browser
 The default Floating City mission works without a key. For the hackathon demo, the first stage also includes **Live GPT Mission Lab**: a parent can enter a general topic and GPT-5.6 prepares a structured claim, hidden assumption, and three reasoning clues.
 
 1. Import the repository in Vercel and deploy the `dev` branch for a preview.
-2. In **Project Settings → Environment Variables**, add `OPENAI_API_KEY` for the Preview and Production environments. Optionally set `OPENAI_MODEL=gpt-5.6` (the default).
-3. Redeploy. Vercel serves `api/live-challenge.js`; the browser calls it at `/api/live-challenge` and never sees the key.
+2. In **Project Settings → Environment Variables**, add `OPENAI_API_KEY` and a unique `DEMO_ACCESS_TOKEN` (16+ characters) for the Preview and Production environments. Optionally set `OPENAI_MODEL=gpt-5.6` (the default).
+3. Redeploy. Vercel serves `api/demo-access.js` and `api/live-challenge.js`; the browser never sees the API key or the judge access code.
+4. Share the judge access code only with hackathon reviewers. It unlocks live GPT for two hours in that browser through a signed, HTTP-only cookie. The preset Floating City mission remains public and complete.
 
-Use a general topic, not a child’s name, answer, or other personal information. If the key, model access, or network is unavailable, the interface explains that the live challenge is unavailable and the complete preset mission still works.
+Use a general topic, not a child’s name, answer, or other personal information. If the access code, key, model access, or network is unavailable, the interface explains that the live challenge is unavailable and the complete preset mission still works.
 
 ## What to demo (about 90 seconds)
 
@@ -83,7 +84,9 @@ Suggested `MissionPack` contract: `mission`, `claim`, `choicePrompts`, `assumpti
 - `index.html` — accessible activity structure
 - `styles.css` — responsive canvas and purposeful CSS motion
 - `app.js` — deterministic mission state and receipt assembly
-- `api/live-challenge.js` — Vercel serverless live-GPT boundary
+- `api/demo-access.js` — Vercel serverless judge-access boundary
+- `api/live-challenge.js` — Vercel serverless live-GPT boundary (requires judge access)
+- `demo-access.js` — signed, HTTP-only judge-access cookie helpers
 - `live-challenge.js` — server-side input, schema, and output validation
 - `mission-state.js` — testable mission-state transitions and receipt transforms
 - `test/` — unit tests and a self-contained browser smoke test

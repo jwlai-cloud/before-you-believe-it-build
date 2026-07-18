@@ -56,14 +56,19 @@
                 <h2 id="live-mission-title">Bring a topic to the canvas.</h2>
                 <p>GPT-5.6 can prepare a fresh claim and reasoning clues. A parent enters the topic; the child’s answer stays on this device.</p>
               </div>
-              <form class="live-mission-form" id="live-mission-form">
+              <form class="judge-access-form" id="judge-access-form">
+                <label for="judge-access-code">Judge access code</label>
+                <input id="judge-access-code" name="code" type="password" autocomplete="off" required />
+                <button type="submit" id="judge-access-submit">Unlock live GPT <span aria-hidden="true">↗</span></button>
+              </form>
+              <form class="live-mission-form" id="live-mission-form" hidden>
                 <label for="live-topic">A topic to explore</label>
                 <input id="live-topic" name="topic" maxlength="80" placeholder="e.g. school gardens" required />
                 <label for="live-age-band">Age band</label>
                 <select id="live-age-band" name="ageBand"><option value="8-10">8–10</option><option value="11-13">11–13</option></select>
                 <button type="submit" id="live-mission-submit">Prepare a live challenge <span aria-hidden="true">↗</span></button>
               </form>
-              <p class="live-mission-status" id="live-mission-status" aria-live="polite">The preset Floating City mission works even if live GPT is unavailable.</p>
+              <p class="live-mission-status" id="live-mission-status" aria-live="polite">The preset Floating City mission works without live GPT.</p>
               <article class="live-mission-result" id="live-mission-result" aria-label="Live GPT reasoning challenge" tabindex="-1" hidden>
                 <div class="live-result-top"><span>LIVE REASONING CHALLENGE</span><strong id="live-topic-label"></strong></div>
                 <blockquote id="live-claim"></blockquote>

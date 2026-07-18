@@ -12,6 +12,8 @@ const receiptStatus = document.querySelector('#receipt-action-status');
 const nextLabel = document.querySelector('#next-label');
 const nextIcon = document.querySelector('#next-icon');
 const liveMissionForm = document.querySelector('#live-mission-form');
+const judgeAccessForm = document.querySelector('#judge-access-form');
+const judgeAccessSubmit = document.querySelector('#judge-access-submit');
 const liveMissionStatus = document.querySelector('#live-mission-status');
 const liveMissionResult = document.querySelector('#live-mission-result');
 const liveMissionSubmit = document.querySelector('#live-mission-submit');
@@ -41,6 +43,26 @@ function setLiveMissionStatus(message, isError = false) {
   if (!liveMissionStatus) return;
   liveMissionStatus.textContent = message;
   liveMissionStatus.classList.toggle('error', isError);
+}
+
+function setLiveMissionAccess(authorized) {
+  if (liveMissionForm) liveMissionForm.hidden = !authorized;
+  if (judgeAccessForm) judgeAccessForm.hidden = authorized;
+}
+
+async function refreshLiveMissionAccess() {
+  try {
+    const response = await fetch('/api/demo-access', { credentials: 'same-origin' });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload?.error || 'Live GPT is unavailable.');
+    setLiveMissionAccess(Boolean(payload?.authorized));
+    setLiveMissionStatus(payload?.authorized
+      ? 'Judge access is ready. Use a general topic, never a child’s personal information.'
+      : 'Enter the judge access code to prepare a live challenge.');
+  } catch {
+    setLiveMissionAccess(false);
+    setLiveMissionStatus('Live GPT is unavailable right now. The preset mission is ready to use.', true);
+  }
 }
 
 function setText(selector, text) {
@@ -202,6 +224,30 @@ copyReceipt?.addEventListener('click', async () => {
   }
 });
 printReceipt?.addEventListener('click', () => window.print());
+judgeAccessForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const code = document.querySelector('#judge-access-code')?.value || '';
+  if (judgeAccessSubmit) judgeAccessSubmit.disabled = true;
+  setLiveMissionStatus('Checking judge access…');
+  try {
+    const response = await fetch('/api/demo-access', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload?.authorized) throw new Error(payload?.error || 'That access code did not work.');
+    setLiveMissionAccess(true);
+    judgeAccessForm.reset();
+    setLiveMissionStatus('Judge access is ready. Use a general topic, never a child’s personal information.');
+    document.querySelector('#live-topic')?.focus();
+  } catch (error) {
+    setLiveMissionStatus(error.message || 'That access code did not work.', true);
+  } finally {
+    if (judgeAccessSubmit) judgeAccessSubmit.disabled = false;
+  }
+});
 liveMissionForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const topic = document.querySelector('#live-topic')?.value.trim() || '';
@@ -233,3 +279,4 @@ setAnswerValues(state.answer);
 restoreSelections();
 updateAnswerPreview();
 showStage(state.current, false);
+refreshLiveMissionAccess();
