@@ -261,6 +261,7 @@ liveMissionForm?.addEventListener('submit', async (event) => {
   try {
     const response = await fetch('/api/live-challenge', {
       method: 'POST',
+      credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ topic, ageBand })
     });

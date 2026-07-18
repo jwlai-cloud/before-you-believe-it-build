@@ -40,7 +40,7 @@
 
 **What it actually does:** The optional Vercel function receives a general topic and age band from a parent, calls GPT-5.6 through the Responses API, then returns a strict JSON reasoning challenge. The browser never receives an API key and never sends the child’s working answer.
 
-**Why we chose it over alternatives:** Structured Outputs bounds the browser contract, while a serverless function keeps credentials out of client JavaScript. The static MissionPack remains usable when live GPT is unavailable.
+**Why we chose it over alternatives:** Structured Outputs constrain the browser contract, while a serverless function keeps credentials out of client JavaScript. The static MissionPack remains usable when live GPT is unavailable.
 
 **The specific parts used today:** `POST /api/live-challenge`, the Responses API, `gpt-5.6` by default, low reasoning effort, strict JSON Schema, server-side `OPENAI_API_KEY`, and manual output validation before rendering.
 
