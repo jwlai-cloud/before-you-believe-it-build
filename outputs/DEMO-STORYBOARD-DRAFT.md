@@ -6,7 +6,9 @@
 
 Before You Believe It turns a short weekend parent-and-child moment with AI into a visible reasoning practice: the child forms the answer while AI supplies bounded challenge material and never becomes the grader.
 
-## Planned 2:40 demo
+## Planned 2:50 submission video
+
+The family activity takes 5–7 minutes. This separate submission video is deliberately 2:50 to meet the requested three-minute limit while showing the complete flow.
 
 | Time | Screen | Narration draft | Edit note |
 | --- | --- | --- | --- |

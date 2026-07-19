@@ -1,6 +1,6 @@
 # Before You Believe It — three-minute demo voice-over
 
-**Target runtime:** 2:45–2:55, plus a 5-second safety buffer if the submission limit is exactly three minutes.  
+**Target runtime:** 2:45–2:55, plus a 5-second safety buffer if the submission limit is exactly three minutes. The family activity itself takes 5–7 minutes; this is the shorter submission video.
 **Voice direction:** warm, calm, curious adult narrator; never perform a child’s voice or imply that AI is an authority.
 
 | Time | Screen action | Narration |

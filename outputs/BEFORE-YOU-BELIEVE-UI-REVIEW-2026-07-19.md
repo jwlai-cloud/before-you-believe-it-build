@@ -19,6 +19,7 @@ The first stage now adds a paper-cut “two people, one question” visual and t
 
 > One small pause to practise thinking together.
 
+>
 > For parents and kids: read an AI claim, notice a question, check a clue, and make something that is true to the child’s own thinking.
 
 The live GPT panel is moved after the bundled claim and child-choice activity. It is relabelled **Live GPT · reviewer demo** and explains that GPT prepares claim material and reasoning clues for an adult and child to question together. It does not present GPT as the answer engine.
