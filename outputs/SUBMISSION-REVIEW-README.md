@@ -7,6 +7,9 @@ These files preserve the current evidence and planning work before final submiss
 - [UI verification](UI-VERIFICATION-2026-07-18.md) — observed browser behaviour at the supplied production URL.
 - [Demo storyboard](DEMO-STORYBOARD-DRAFT.md) — the proposed narrated sequence for the intended parent-and-child product.
 - [Screenshot](choice-atlas-ui-check.jpg) — a captured public UI state after route inputs were edited.
+- [Before You Believe It UI review](BEFORE-YOU-BELIEVE-UI-REVIEW-2026-07-19.md) — production findings and the locally verified visual revision.
+- [Three-minute voice-over script](DEMO-VOICEOVER-SCRIPT-v1.md) — shot-by-shot narration and capture plan.
+- [Revised UI screenshot](before-you-believe-it-ui-revision-2026-07-19.jpg) — the local first-stage revision before deployment.
 
 ## Important scope note
 
