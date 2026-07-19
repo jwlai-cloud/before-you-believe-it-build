@@ -116,7 +116,11 @@ function readAnswer() {
 }
 
 function restoreSelections() {
-  document.querySelectorAll('[data-think]').forEach((item) => item.classList.toggle('selected', item.dataset.think === state.thinkChoice));
+  document.querySelectorAll('[data-think]').forEach((item) => {
+    const selected = item.dataset.think === state.thinkChoice;
+    item.classList.toggle('selected', selected);
+    item.setAttribute('aria-pressed', String(selected));
+  });
   document.querySelectorAll('[data-evidence]').forEach((item) => item.classList.toggle('chosen', item.dataset.evidence === state.evidenceChoice));
   const thinkNote = document.querySelector('#think-note');
   const checkNote = document.querySelector('#check-note');

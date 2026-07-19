@@ -50,11 +50,40 @@
               <h1 id="mission-title">A clever answer<br />needs a <i>second look.</i></h1>
               <p class="lede">An AI helper made a confident claim about a city in the clouds. Before we agree, what do <em>you</em> notice?</p>
             </div>
-            <section class="live-mission" aria-labelledby="live-mission-title">
+            <aside class="purpose-note" data-purpose-note aria-labelledby="purpose-title">
+              <div class="purpose-figure" aria-hidden="true">
+                <span class="figure-person figure-parent"></span>
+                <span class="figure-person figure-child"></span>
+                <span class="figure-question">?</span>
+                <span class="figure-card figure-card-one"></span>
+                <span class="figure-card figure-card-two"></span>
+              </div>
+              <div class="purpose-copy">
+                <p class="eyebrow">Why this exists</p>
+                <h2 id="purpose-title">One small pause<br />to practise thinking <i>together.</i></h2>
+                <p>For parents and kids: read an AI claim, notice a question, check a clue, and make something that is true to the child’s own thinking.</p>
+                <p class="purpose-promise"><span aria-hidden="true">✦</span> No answer key. No score. Just a conversation you can keep having.</p>
+              </div>
+            </aside>
+            <section class="claim-board" aria-label="AI claim">
+              <div class="ai-stamp"><span aria-hidden="true">✦</span> AI helper’s draft</div>
+              <blockquote>“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
+              <div class="claim-footer"><span>PLAUSIBLE, BUT UNPROVEN</span><span class="curve-arrow" aria-hidden="true">↘</span></div>
+            </section>
+            <fieldset class="choice-fieldset">
+              <legend>What makes you pause?</legend>
+              <div class="choice-grid">
+                <button class="choice-card" type="button" aria-pressed="false" data-think="How would a floating city get power and water?"><span class="choice-index">A</span><span>How would it get power and water?</span></button>
+                <button class="choice-card" type="button" aria-pressed="false" data-think="Would it really leave the land below untouched?"><span class="choice-index">B</span><span>Would it really leave the land below untouched?</span></button>
+                <button class="choice-card" type="button" aria-pressed="false" data-think="Who gets to live there, and who does not?"><span class="choice-index">C</span><span>Who gets to live there — and who doesn’t?</span></button>
+              </div>
+              <p class="selection-note" id="think-note" aria-live="polite">Choose the question that pulls at you.</p>
+            </fieldset>
+            <section class="live-mission" data-live-reviewer-demo aria-labelledby="live-mission-title">
               <div class="live-mission-copy">
-                <p class="eyebrow">LIVE GPT · OPTIONAL</p>
-                <h2 id="live-mission-title">Bring a topic to the canvas.</h2>
-                <p>GPT-5.6 can prepare a fresh claim and reasoning clues. A parent enters the topic; the child’s answer stays on this device.</p>
+                <p class="eyebrow">LIVE GPT · REVIEWER DEMO</p>
+                <h2 id="live-mission-title">Bring a fresh question<br />to the table.</h2>
+                <p>A parent enters a general topic. GPT-5.6 prepares a claim and reasoning clues for a child and adult to question together; the child’s answer stays on this device.</p>
               </div>
               <form class="judge-access-form" id="judge-access-form">
                 <label for="judge-access-code">Judge access code</label>
@@ -79,20 +108,6 @@
                 <p class="live-uncertainty"><strong>Still open:</strong> <span id="live-uncertainty"></span></p>
               </article>
             </section>
-            <div class="claim-board" aria-label="AI claim">
-              <div class="ai-stamp"><span aria-hidden="true">✦</span> AI helper’s draft</div>
-              <blockquote>“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
-              <div class="claim-footer"><span>PLAUSIBLE, BUT UNPROVEN</span><span class="curve-arrow" aria-hidden="true">↘</span></div>
-            </div>
-            <fieldset class="choice-fieldset">
-              <legend>What makes you pause?</legend>
-              <div class="choice-grid">
-                <button class="choice-card" type="button" data-think="How would a floating city get power and water?"><span class="choice-index">A</span><span>How would it get power and water?</span></button>
-                <button class="choice-card" type="button" data-think="Would it really leave the land below untouched?"><span class="choice-index">B</span><span>Would it really leave the land below untouched?</span></button>
-                <button class="choice-card" type="button" data-think="Who gets to live there, and who does not?"><span class="choice-index">C</span><span>Who gets to live there — and who doesn’t?</span></button>
-              </div>
-              <p class="selection-note" id="think-note" aria-live="polite">Choose the question that pulls at you.</p>
-            </fieldset>
           </section>
 
           <section class="stage" data-stage="1" aria-labelledby="push-title" tabindex="-1" hidden>

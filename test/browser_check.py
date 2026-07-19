@@ -92,6 +92,8 @@ def run_browser_checks(base_url):
         assert_no_horizontal_overflow(page)
 
         page.locator("[data-think]").nth(1).click()
+        assert page.locator("[data-think]").nth(1).get_attribute("aria-pressed") == "true"
+        assert page.locator("[data-think]").nth(0).get_attribute("aria-pressed") == "false"
         assert "Would it really leave the land below untouched?" in page.locator("#think-note").inner_text()
         page.locator("#next").click()
 
@@ -139,6 +141,7 @@ def run_browser_checks(base_url):
         page.locator("#restart").click()
         assert page.locator("[data-stage='0']").is_visible()
         assert page.locator("[data-think].selected").count() == 0
+        assert page.locator("[data-think][aria-pressed='true']").count() == 0
         assert console_errors == [], f"console errors: {console_errors}"
 
         for width in (320, 768, 1024, 1440):
