@@ -14,6 +14,8 @@ The optional live reviewer demo uses `gpt-5.6` through the OpenAI Responses API.
 
 The static Floating City `MissionPack` remains fully usable if the model, access code, or network is unavailable. That makes the live path an honest enhancement rather than a prerequisite for the educational experience.
 
+For a time-limited recording only, the server supports `BEFORE_YOU_BELIEVE_DEMO_BYPASS=true` when—and only when—Vercel supplies `VERCEL_ENV=preview`. This bypass is inert in Production and does not bypass the API-key requirement. Remove it and redeploy the Preview immediately after capture.
+
 ## Codex: development role
 
 Codex was used to build and refine the production prototype, including:

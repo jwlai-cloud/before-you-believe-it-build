@@ -44,6 +44,12 @@ The default Floating City mission works without a key. For the hackathon demo, t
 
 Use a general topic, not a child’s name, answer, or other personal information. If the access code, key, model access, or network is unavailable, the interface explains that the live challenge is unavailable and the complete preset mission still works.
 
+### Temporary Preview-only capture bypass
+
+For a one-time video capture, set `BEFORE_YOU_BELIEVE_DEMO_BYPASS=true` **only** in Vercel's **Preview** environment, then redeploy the Preview. The server checks both that exact value and Vercel's server-supplied `VERCEL_ENV=preview`; the bypass is inert in Production, even if the variable is mistakenly present there. It never bypasses `OPENAI_API_KEY` or model availability.
+
+Remove the variable and redeploy Preview immediately after capture. Never set it for Production, never commit a value to `.env`, and do not record the bypass state, any access code, cookie, or API key in the video.
+
 ## What to demo (about 90 seconds)
 
 1. Open the Floating City mission and read the AI helper’s deliberately plausible claim.
