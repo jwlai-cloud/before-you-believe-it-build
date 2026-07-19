@@ -51,6 +51,10 @@ def run_browser_checks(base_url):
         page.goto(base_url, wait_until="networkidle")
 
         assert page.locator("#mission-title").is_visible()
+        openai_evidence = page.locator("[data-openai-build-week-evidence]")
+        assert openai_evidence.count() == 1
+        assert "GPT-5.6" in openai_evidence.inner_text()
+        assert "Codex" in openai_evidence.inner_text()
         assert page.locator("#judge-access-form").is_visible()
         assert page.locator("#live-mission-form").is_hidden()
         page.locator("#judge-access-code").fill("judge-demo-token")

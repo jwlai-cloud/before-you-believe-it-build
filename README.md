@@ -2,6 +2,15 @@
 
 A judge-ready, no-login Build Week prototype for a 5–7 minute parent-and-child reasoning activity. It is deliberately a canvas, not a chat: the child moves through **Think → Push back → Check → Make → Own**, while the parent stays alongside as a calm co-investigator.
 
+## OpenAI Build Week evidence
+
+This project was built with **Codex using GPT-5.6**, and has two deliberately distinct OpenAI roles:
+
+- **GPT-5.6 at runtime:** the optional reviewer-only live path makes one server-side Responses API request to `gpt-5.6`. It uses strict JSON Schema output to prepare a claim, hidden assumption, three reasoning clues, a parent prompt, and an uncertainty. The browser validates and renders that bounded material. GPT-5.6 never receives the child’s answer and is instructed never to grade, diagnose, rank, recommend, persuade, or decide what the child should believe. See [`live-challenge.js`](live-challenge.js) and [`api/live-challenge.js`](api/live-challenge.js).
+- **Codex in development:** Codex accelerated the implementation and refinement of the accessible five-stage canvas, session-only Learning Receipt, signed judge-access boundary, live GPT validation, Node test suite, Playwright browser smoke test, deployment documentation, and demo artifacts. Key implementation decisions—including why the reliable static MissionPack remains available and why the live path is server-side—are recorded in [`docs/adr`](docs/adr) and [`docs/OPENAI-BUILD-WEEK-EVIDENCE.md`](docs/OPENAI-BUILD-WEEK-EVIDENCE.md).
+
+The judge-facing UI includes the same plain-language evidence card. The demo video will show the real live GPT-5.6 generation, the captioned wait, and this architecture boundary; its narration names both GPT-5.6 and Codex.
+
 ## Run it
 
 No install or API key is required.
@@ -34,6 +43,12 @@ The default Floating City mission works without a key. For the hackathon demo, t
 4. Share the judge access code only with hackathon reviewers. It unlocks live GPT for two hours in that browser through a signed, HTTP-only cookie. The preset Floating City mission remains public and complete.
 
 Use a general topic, not a child’s name, answer, or other personal information. If the access code, key, model access, or network is unavailable, the interface explains that the live challenge is unavailable and the complete preset mission still works.
+
+### Temporary Preview-only capture bypass
+
+For a one-time video capture, set `BEFORE_YOU_BELIEVE_DEMO_BYPASS=true` **only** in Vercel's **Preview** environment, then redeploy the Preview. The server checks both that exact value and Vercel's server-supplied `VERCEL_ENV=preview`; the bypass is inert in Production, even if the variable is mistakenly present there. It never bypasses `OPENAI_API_KEY` or model availability.
+
+Remove the variable and redeploy Preview immediately after capture. Never set it for Production, never commit a value to `.env`, and do not record the bypass state, any access code, cookie, or API key in the video.
 
 ## What to demo (about 90 seconds)
 

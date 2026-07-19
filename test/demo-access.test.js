@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const {
   createAccessCookie,
   isAuthorizedRequest,
+  isPreviewDemoBypassEnabled,
   verifyAccessCookie
 } = require('../demo-access.js');
 
@@ -23,4 +24,11 @@ test('judge access rejects missing, tampered, and expired cookies', () => {
   assert.equal(verifyAccessCookie(`${cookie}x`, token, 1_500), false);
   assert.equal(verifyAccessCookie(cookie, token, 2_001), false);
   assert.equal(isAuthorizedRequest({ headers: {} }, token, 1_500), false);
+});
+
+test('preview capture bypass requires both the Vercel preview environment and exact opt-in value', () => {
+  assert.equal(isPreviewDemoBypassEnabled({ VERCEL_ENV: 'preview', BEFORE_YOU_BELIEVE_DEMO_BYPASS: 'true' }), true);
+  assert.equal(isPreviewDemoBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_DEMO_BYPASS: 'true' }), false);
+  assert.equal(isPreviewDemoBypassEnabled({ VERCEL_ENV: 'preview', BEFORE_YOU_BELIEVE_DEMO_BYPASS: 'TRUE' }), false);
+  assert.equal(isPreviewDemoBypassEnabled({ VERCEL_ENV: 'preview' }), false);
 });

@@ -1,5 +1,5 @@
 const { requestLiveChallenge, validateLiveChallengeInput } = require('../live-challenge.js');
-const { isAuthorizedRequest, isDemoAccessConfigured } = require('../demo-access.js');
+const { isAuthorizedRequest, isDemoAccessConfigured, isPreviewDemoBypassEnabled } = require('../demo-access.js');
 
 module.exports = async function liveChallenge(request, response) {
   if (request.method !== 'POST') {
@@ -10,10 +10,11 @@ module.exports = async function liveChallenge(request, response) {
   try {
     const input = validateLiveChallengeInput(request.body || {});
     const demoToken = process.env.DEMO_ACCESS_TOKEN;
-    if (!isDemoAccessConfigured(demoToken)) {
+    const capturePreview = isPreviewDemoBypassEnabled();
+    if (!capturePreview && !isDemoAccessConfigured(demoToken)) {
       return response.status(503).json({ error: 'Live GPT judge access is not configured.' });
     }
-    if (!isAuthorizedRequest(request, demoToken)) {
+    if (!capturePreview && !isAuthorizedRequest(request, demoToken)) {
       return response.status(401).json({ error: 'Judge access is required to prepare a live challenge.' });
     }
     const challenge = await requestLiveChallenge({

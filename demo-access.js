@@ -7,6 +7,11 @@ function isDemoAccessConfigured(token) {
   return typeof token === 'string' && token.length >= 12;
 }
 
+function isPreviewDemoBypassEnabled(environment = process.env) {
+  return environment?.VERCEL_ENV === 'preview'
+    && environment?.BEFORE_YOU_BELIEVE_DEMO_BYPASS === 'true';
+}
+
 function constantTimeEqual(left, right) {
   const leftBuffer = Buffer.from(String(left));
   const rightBuffer = Buffer.from(String(right));
@@ -59,5 +64,6 @@ module.exports = {
   formatAccessCookie,
   isAuthorizedRequest,
   isDemoAccessConfigured,
+  isPreviewDemoBypassEnabled,
   verifyAccessCookie
 };
