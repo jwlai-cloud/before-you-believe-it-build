@@ -2,6 +2,15 @@
 
 A judge-ready, no-login Build Week prototype for a 5–7 minute parent-and-child reasoning activity. It is deliberately a canvas, not a chat: the child moves through **Think → Push back → Check → Make → Own**, while the parent stays alongside as a calm co-investigator.
 
+## OpenAI Build Week evidence
+
+This project was built with **Codex using GPT-5.6**, and has two deliberately distinct OpenAI roles:
+
+- **GPT-5.6 at runtime:** the optional reviewer-only live path makes one server-side Responses API request to `gpt-5.6`. It uses strict JSON Schema output to prepare a claim, hidden assumption, three reasoning clues, a parent prompt, and an uncertainty. The browser validates and renders that bounded material. GPT-5.6 never receives the child’s answer and is instructed never to grade, diagnose, rank, recommend, persuade, or decide what the child should believe. See [`live-challenge.js`](live-challenge.js) and [`api/live-challenge.js`](api/live-challenge.js).
+- **Codex in development:** Codex accelerated the implementation and refinement of the accessible five-stage canvas, session-only Learning Receipt, signed judge-access boundary, live GPT validation, Node test suite, Playwright browser smoke test, deployment documentation, and demo artifacts. Key implementation decisions—including why the reliable static MissionPack remains available and why the live path is server-side—are recorded in [`docs/adr`](docs/adr) and [`docs/OPENAI-BUILD-WEEK-EVIDENCE.md`](docs/OPENAI-BUILD-WEEK-EVIDENCE.md).
+
+The judge-facing UI includes the same plain-language evidence card. The demo video will show the real live GPT-5.6 generation, the captioned wait, and this architecture boundary; its narration names both GPT-5.6 and Codex.
+
 ## Run it
 
 No install or API key is required.

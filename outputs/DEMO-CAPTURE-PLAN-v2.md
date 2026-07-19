@@ -18,7 +18,7 @@ Before You Believe It gives parents and children a small, repeatable weekend act
 | 1:42–1:52 | Live reviewer form, with access code deliberately out of frame | Reviewers can bring a general topic; the access code and child response are never recorded. | `Live GPT · reviewer demo` |
 | 1:52–2:00 | Purpose-built pause card (not a loading spinner) | A live structured challenge is being prepared. Recording pauses here rather than pretending response time is instant. | `Recording paused while GPT-5.6 prepares structured challenge material` |
 | 2:00–2:26 | Live generated claim, assumption, clues, uncertainty | GPT prepares material to question, never a score, recommendation, diagnosis, or final answer. | `AI prepares challenge material — families do the reasoning` |
-| 2:26–2:43 | Architecture card | Signed judge access gates the server call; schema validation bounds what the browser receives. | `Signed access → GPT-5.6 → validated challenge → reasoning canvas` |
+| 2:26–2:43 | OpenAI evidence card, then architecture card | Codex accelerated implementation and testing; signed judge access gates the GPT-5.6 call; schema validation bounds what the browser receives. | `Built with Codex + GPT-5.6`<br />`Signed access → GPT-5.6 → validated challenge → reasoning canvas` |
 | 2:43–2:55 | Preset fallback and URL | The complete activity works even when live AI is unavailable. | `Pause. Question. Check. Think together.` |
 
 ## Capture method

@@ -10,8 +10,8 @@
 | 0:58–1:20 | “Then the claim opens up. Together they spot the hidden assumption, compare a systems clue with another view, and keep an uncertainty visible. The goal is not to prove AI wrong. It is to understand what an answer needs before believing it.” |
 | 1:20–1:42 | “The child builds a careful working answer in their own words. The Learning Receipt separates what the child contributed, what AI prepared, the clue they considered, and what they still want to know. The child’s answer stays on the device.” |
 | 1:42–2:00 | “For the live Build Week demo, a reviewer can bring a general topic. We pause recording while GPT-5.6 prepares the structured challenge material. That wait is real; we do not pretend generation is instant.” |
-| 2:00–2:26 | “When it returns, GPT has prepared a claim, an assumption, clues, a parent prompt, and an uncertainty to explore. It never grades, diagnoses, ranks, recommends, or decides what a child should believe. AI prepares the challenge. The family does the reasoning.” |
-| 2:26–2:43 | “A signed judge-access cookie protects the server-side call. Structured output is validated before it reaches the canvas, and the child’s answer never crosses that boundary.” |
+| 2:00–2:26 | “When it returns, GPT-5.6 has prepared a claim, an assumption, clues, a parent prompt, and an uncertainty to explore. It never grades, diagnoses, ranks, recommends, or decides what a child should believe. AI prepares the challenge. The family does the reasoning.” |
+| 2:26–2:43 | “Codex helped us build and test this canvas, while a signed judge-access cookie protects the server-side GPT-5.6 call. Structured output is validated before it reaches the canvas, and the child’s answer never crosses that boundary.” |
 | 2:43–2:55 | “And when live AI is unavailable, the complete preset activity still works. Before You Believe It helps families practise the habit that matters in the AI age: pause, question, check, and think together.” |
 
 ## Voice direction
