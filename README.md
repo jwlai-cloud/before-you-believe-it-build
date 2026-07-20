@@ -11,6 +11,17 @@ This project was built with **Codex using GPT-5.6**, and has two deliberately di
 
 The judge-facing UI includes the same plain-language evidence card. The demo video will show the real live GPT-5.6 generation, the captioned wait, and this architecture boundary; its narration names both GPT-5.6 and Codex.
 
+## How we collaborated with Codex
+
+Codex was a hands-on build partner throughout the project, while the product owner made the final product, engineering, and design calls.
+
+- **Product direction:** Together, we turned the brief into a short family ritual rather than another chatbot. The product owner chose the central promise: children should practise questioning confident AI responses with a parent, not be trained to accept them. That led to the five-step path, no points or “right answers,” and a Learning Receipt that creates a calm prompt for a parent-and-child conversation.
+- **Design decisions:** Codex helped turn that promise into a responsive two-dimensional reasoning canvas with a persistent path, evidence links, purposeful motion, and a child-owned working answer. The product owner directed the visual tone and the emphasis on making the purpose legible before the interaction begins.
+- **Engineering decisions:** Codex accelerated the static MissionPack, deterministic state model, accessible controls, session-only receipt, tests, deployment configuration, and documentation. Together we chose a server-side GPT-5.6 boundary with schema validation and signed reviewer access so the child’s answer never reaches the model or browser-visible credentials.
+- **Quality loop:** Codex helped run unit, structural, and browser checks; prepare reviewable capture artifacts; and address scoped code-review feedback. The product owner reviewed the trade-offs, approved the live path, and retained the static activity as the reliable no-key experience.
+
+GPT-5.6 is therefore part of the live product experience—preparing bounded material a family can interrogate—while Codex accelerated the design, implementation, verification, and submission workflow that made that experience shippable.
+
 ## Run it
 
 No install or API key is required.
