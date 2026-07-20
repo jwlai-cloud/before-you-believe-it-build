@@ -9,7 +9,7 @@
 - **Category:** Education
 - **Public project link:** https://before-you-believe-it-build.vercel.app/
 - **Public code:** https://github.com/jwlai-cloud/before-you-believe-it-build
-- **Demo video:** _Add the public YouTube URL after upload; it must be under three minutes._
+- **Demo video:** _Add the **public** (not unlisted) YouTube URL after upload; it must be less than three minutes._
 
 ## Inspiration
 
@@ -69,14 +69,20 @@ OpenAI GPT-5.6, OpenAI Responses API, OpenAI Codex, Vercel Serverless Functions,
 
 The public static Floating City mission is complete without any login, API key, or special access. For the optional live GPT-5.6 reviewer flow, enter the current judge access code in **Live demo access**, then submit a general topic and age band. Use no child names or private details. The server calls GPT-5.6 only after signed reviewer access; the child’s working answer is not sent.
 
-**Before submit:** replace this paragraph’s omitted code with the current code in the Devpost private field only. Do not commit it to this repository or include it in the video.
+**Judge access code:** `PASTE_CURRENT_CODE_HERE`
+
+Keep `OPENAI_API_KEY`, `DEMO_ACCESS_TOKEN`, and model access configured through the end of the judging period. Do not publish the code, commit it to this repository, or include it in the video.
+
+## Production access plan
+
+The temporary `BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS` exists only to record a live request without revealing a code. Before publishing the submission, remove that variable from Production and redeploy. Restore the normal signed judge-code gate, then put the current code in Devpost’s private judge-instructions field above. This keeps the full static mission openly testable and lets reviewers exercise the live GPT-5.6 path without exposing a paid endpoint to the public.
 
 ## Required Devpost checklist
 
 - [ ] Choose **Education**.
-- [ ] Add public YouTube video URL (under 3 minutes; audio names both Codex and GPT-5.6).
+- [ ] Add a **public, not unlisted** YouTube video URL (less than 3 minutes; audio names both Codex and GPT-5.6).
 - [ ] Add the repository URL above.
 - [ ] Paste the current Codex `/feedback` Session ID in the required field.
 - [ ] Select submitter type and country.
-- [ ] Add the private judge access code only to the optional judge-instructions field, if live access remains enabled.
-- [ ] Confirm the production capture bypass is removed and production redeployed before publishing.
+- [ ] Replace `PASTE_CURRENT_CODE_HERE` only in Devpost’s private judge-instructions field; do not save the code in Git.
+- [ ] Remove the production capture bypass, confirm the normal code gate works, and keep the API key/model access funded through judging.
