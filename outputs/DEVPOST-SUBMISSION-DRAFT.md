@@ -5,7 +5,7 @@
 ## Project basics
 
 - **Project name:** Before You Believe It
-- **Tagline (198 characters):** A five-minute parent-and-child activity that helps kids question confident AI claims, check assumptions, and build an answer they can own—together with a parent.
+- **Tagline (115 characters):** A 5-minute parent-child activity helping kids question confident AI claims and build answers they can own together.
 - **Category:** Education
 - **Public project link:** https://before-you-believe-it-build.vercel.app/
 - **Public code:** https://github.com/jwlai-cloud/before-you-believe-it-build
