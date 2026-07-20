@@ -16,4 +16,4 @@
 
 ## Voice direction
 
-Warm, steady, curious adult narrator. Leave short pauses after “accept it,” “sets the direction,” and “the family does the reasoning.” Do not imitate a child or imply that AI is an authority.
+Use a real human narrator if available: warm, conversational, thoughtful, and slightly imperfect rather than polished like an advert. Speak to parents as another parent or educator, with natural breath pauses after “accept it,” “sets the direction,” and “the family does the reasoning.” Do not imitate a child or imply that AI is an authority.

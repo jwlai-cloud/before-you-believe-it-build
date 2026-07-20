@@ -1,0 +1,20 @@
+# Local environment files and OS metadata
+.env
+.env.local
+.env.*.local
+.DS_Store
+
+# Large local demo-video artifacts. Keep reviewable still frames in outputs/captures/.
+outputs/video/
+outputs/captures/raw/
+outputs/**/*.mp4
+outputs/**/*.mov
+outputs/**/*.m4v
+outputs/**/*.webm
+outputs/**/*.avi
+outputs/**/*.mkv
+outputs/**/*.wav
+outputs/**/*.aiff
+outputs/**/*.flac
+outputs/**/*.mp3
+outputs/**/*.m4a
