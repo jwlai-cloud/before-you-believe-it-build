@@ -9,4 +9,4 @@ These are reviewable, upload-ready visual artifacts generated from `docs/ARCHITE
 - `Before-You-Believe-It-submission-media.pdf` — printable multi-page pack.
 - `BEFORE-YOU-BELIEVE-SUBMISSION-MEDIA.html` — source of truth for all images and PDF.
 
-The final demo video uses the real UI captures, `DEMO-VOICEOVER-SCRIPT-v2.md`, and `DEMO-VIDEO-CAPTIONS-v1.srt`. The rendered MP4 and generated MP3 deliberately remain Git-ignored; this source material stays in Git for human review.
+The final demo video uses the real UI captures, `DEMO-VOICEOVER-SCRIPT-v3.md`, and `DEMO-VIDEO-CAPTIONS-v2.srt`. It adds a 21.864-second opening that explains GPT-5.6's bounded server-side role, and places captions in a dedicated lower band so they never cover the UI. The rendered MP4 and generated MP3 deliberately remain Git-ignored; this source material stays in Git for human review.
