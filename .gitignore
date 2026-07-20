@@ -7,14 +7,14 @@
 # Large local demo-video artifacts. Keep reviewable still frames in outputs/captures/.
 outputs/video/
 outputs/captures/raw/
-*.mp4
-*.mov
-*.m4v
-*.webm
-*.avi
-*.mkv
-*.wav
-*.aiff
-*.flac
-*.mp3
-*.m4a
+outputs/**/*.mp4
+outputs/**/*.mov
+outputs/**/*.m4v
+outputs/**/*.webm
+outputs/**/*.avi
+outputs/**/*.mkv
+outputs/**/*.wav
+outputs/**/*.aiff
+outputs/**/*.flac
+outputs/**/*.mp3
+outputs/**/*.m4a
