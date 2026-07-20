@@ -96,10 +96,12 @@ test('production capture bypass skips judge-cookie enforcement but still require
   const previousKey = process.env.OPENAI_API_KEY;
   const previousEnvironment = process.env.VERCEL_ENV;
   const previousBypass = process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
+  const previousNodeEnvironment = process.env.NODE_ENV;
   delete process.env.DEMO_ACCESS_TOKEN;
   delete process.env.OPENAI_API_KEY;
   process.env.VERCEL_ENV = 'production';
   process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = 'true';
+  process.env.NODE_ENV = 'test';
   t.after(() => {
     if (previousToken === undefined) delete process.env.DEMO_ACCESS_TOKEN;
     else process.env.DEMO_ACCESS_TOKEN = previousToken;
@@ -109,6 +111,8 @@ test('production capture bypass skips judge-cookie enforcement but still require
     else process.env.VERCEL_ENV = previousEnvironment;
     if (previousBypass === undefined) delete process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
     else process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = previousBypass;
+    if (previousNodeEnvironment === undefined) delete process.env.NODE_ENV;
+    else process.env.NODE_ENV = previousNodeEnvironment;
   });
 
   const response = createResponse();

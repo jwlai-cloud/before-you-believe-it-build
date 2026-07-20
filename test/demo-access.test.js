@@ -38,8 +38,8 @@ test('preview capture bypass requires both the Vercel preview environment and ex
 test('production capture bypass requires a separate exact opt-in value', () => {
   assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'preview', BEFORE_YOU_BELIEVE_DEMO_BYPASS: 'true' }), true);
   assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_DEMO_BYPASS: 'true' }), false);
-  assert.equal(isProductionCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'true' }), true);
-  assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'true' }), true);
+  assert.equal(isProductionCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'true', NODE_ENV: 'test' }), true);
+  assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'true', NODE_ENV: 'test' }), true);
   assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'preview', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'true' }), false);
   assert.equal(isDemoCaptureBypassEnabled({ VERCEL_ENV: 'production', BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS: 'TRUE' }), false);
 });
