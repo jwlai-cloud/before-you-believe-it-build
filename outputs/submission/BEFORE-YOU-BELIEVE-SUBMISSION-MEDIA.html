@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Before You Believe It — submission media</title>
+  <style>
+    :root { --ink:#19352f; --paper:#f8f4ea; --sage:#dce8d9; --mint:#9fbe9c; --coral:#bd5c42; --line:#9cae9f; --white:#fffdf7; --blue:#dbe8ec; --gold:#efd9a5; }
+    * { box-sizing:border-box; } body { margin:0; background:#d7d2c6; color:var(--ink); font-family:Arial, Helvetica, sans-serif; }
+    .sheet { width:1600px; min-height:900px; padding:58px 70px; background:var(--paper); position:relative; overflow:hidden; }
+    .sheet + .sheet { margin-top:28px; }
+    @media print {
+      body { background: none; }
+      .sheet { page-break-after: always; break-after: page; margin: 0; }
+      .sheet + .sheet { margin-top: 0; }
+    }
+    .eyebrow { color:var(--coral); font:700 20px/1.1 "SFMono-Regular", Menlo, monospace; letter-spacing:2px; text-transform:uppercase; }
+    h1 { font-family:Georgia, serif; font-size:58px; line-height:1; letter-spacing:-2px; margin:12px 0 12px; max-width:950px; }
+    .dek { font-size:23px; line-height:1.35; color:#526963; max-width:1130px; margin:0 0 28px; }
+    .rule { height:2px; background:var(--line); opacity:.65; margin:23px 0 28px; }
+    .grid { display:grid; gap:18px; } .arch { grid-template-columns:1fr 1.2fr 1fr; align-items:stretch; }
+    .card { background:var(--white); border:2px solid var(--line); padding:20px 22px; position:relative; }
+    .card h2, .card h3 { margin:0 0 8px; font-family:Georgia, serif; } .card h2 { font-size:29px; } .card h3 { font-size:22px; }
+    .card p, .card li { font-size:18px; line-height:1.32; margin:6px 0; } ul { margin:8px 0 0; padding-left:21px; }
+    .band { border:2px solid var(--line); padding:16px 20px; background:var(--sage); } .band h2 { margin:0; font-family:Georgia, serif; font-size:28px; }
+    .label { font-weight:700; color:var(--coral); text-transform:uppercase; letter-spacing:1px; font-size:15px; }
+    .arrow { align-self:center; text-align:center; font-size:48px; color:var(--coral); font-family:Georgia, serif; }
+    .browser { background:var(--blue); } .server { background:var(--sage); } .model { background:var(--gold); }
+    .card p.small { font-size:15px; color:#526963; } .badge { display:inline-block; font-weight:700; font-size:15px; padding:5px 8px; background:var(--ink); color:white; margin:4px 5px 0 0; }
+    .footer { position:absolute; bottom:30px; left:70px; right:70px; display:flex; justify-content:space-between; border-top:2px solid var(--line); padding-top:14px; color:#526963; font-size:16px; }
+    .callouts { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px; } .callout { padding:15px 18px; border-left:7px solid var(--coral); background:#efe9dc; font-size:17px; line-height:1.3; }
+    .step-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:13px; margin-top:24px; } .step { min-height:210px; padding:18px; border:2px solid var(--line); background:var(--white); } .step b { display:block; font-size:24px; color:var(--coral); } .step h3 { font:700 26px Georgia, serif; margin:9px 0; } .step p { font-size:17px; line-height:1.3; margin:0; }
+    .swim { display:grid; grid-template-columns:1.1fr 1.25fr 1.25fr 1.25fr; border:2px solid var(--line); background:var(--white); margin-top:24px; } .lane { min-height:562px; padding:16px; border-right:2px solid var(--line); position:relative; } .lane:last-child { border-right:0; } .lane h3 { text-align:center; margin:0; font:700 24px Georgia, serif; } .lane p { text-align:center; margin:7px 0; font-size:15px; color:#526963; }
+    .message { position:absolute; left:16px; right:16px; padding:11px; border:2px solid var(--ink); background:var(--sage); font-size:16px; line-height:1.2; } .message b { color:var(--coral); } .m1{top:120px}.m2{top:208px}.m3{top:300px}.m4{top:390px}.m5{top:485px}.orange{background:var(--gold)}.bluebox{background:var(--blue)}
+    .topology { display:grid; grid-template-columns:1fr 140px 1fr; gap:18px; align-items:center; margin-top:28px; } .director { background:var(--ink); color:white; border:0; } .director p { color:white; } .fan { display:grid; gap:13px; } .fan .card { min-height:134px; } .future { position:absolute; right:70px; top:66px; padding:8px 11px; background:var(--coral); color:white; font-weight:700; letter-spacing:1px; }
+    .bottom-row { display:grid; grid-template-columns:1.2fr .8fr; gap:20px; margin-top:24px; } .note { padding:18px; background:var(--gold); border:2px solid var(--line); font-size:19px; line-height:1.35; }
+  </style>
+</head>
+<body>
+  <section class="sheet" id="summary">
+    <div class="eyebrow">OpenAI Build Week · Education</div>
+    <h1>Before You Believe It</h1>
+    <p class="dek">A five-to-seven-minute family activity that turns a confident AI answer into a shared practice of pausing, questioning, checking, and thinking together.</p>
+    <div class="rule"></div>
+    <div class="step-grid">
+      <article class="step"><b>01</b><h3>Think</h3><p>The child chooses the question that makes a plausible claim worth pausing over.</p></article>
+      <article class="step"><b>02</b><h3>Push Back</h3><p>The family reveals the hidden assumption doing work inside the claim.</p></article>
+      <article class="step"><b>03</b><h3>Check</h3><p>They connect a clue or counter-perspective—not a verdict—to the claim.</p></article>
+      <article class="step"><b>04</b><h3>Make</h3><p>The child assembles a provisional answer in their own words.</p></article>
+      <article class="step"><b>05</b><h3>Own</h3><p>A Learning Receipt separates child work, AI help, evidence, uncertainty, and a parent question.</p></article>
+    </div>
+    <div class="callouts">
+      <div class="callout"><strong>Static first.</strong><br />The complete Floating City MissionPack works without a key or network.</div>
+      <div class="callout"><strong>AI is bounded.</strong><br />GPT-5.6 prepares material to question; it never grades, ranks, diagnoses, or decides.</div>
+      <div class="callout"><strong>Child work stays local.</strong><br />The live request receives only a general parent topic and age band.</div>
+    </div>
+    <div class="bottom-row"><div class="note"><strong>Why it matters</strong><br />Parents want to understand how children learn with AI—not only what answer they repeat. Before You Believe It creates an approachable weekend moment for that conversation.</div><div class="card browser"><span class="label">Built and verified with</span><h2>Codex + GPT-5.6</h2><p>Codex accelerated the accessible canvas, tests, deployment boundary, and evidence. GPT-5.6 powers the optional live challenge generator.</p><span class="badge">31 unit tests</span><span class="badge">Static fallback</span></div></div>
+    <div class="footer"><span>before-you-believe-it-build.vercel.app</span><span>Pause · Question · Check · Think together</span></div>
+  </section>
+
+  <section class="sheet" id="architecture">
+    <div class="eyebrow">System architecture · live path</div><h1>One bounded model call, inside a reliable family activity.</h1>
+    <p class="dek">The preset mission always runs locally. The optional reviewer demo adds a server-side GPT-5.6 challenge without exposing credentials or a child’s answer.</p><div class="rule"></div>
+    <div class="grid arch">
+      <article class="card browser"><span class="label">Family browser</span><h2>Reasoning canvas</h2><ul><li>Static Floating City MissionPack</li><li>Think → Push Back → Check → Make → Own</li><li>Session-only child response and receipt</li></ul><p class="small">No API key. Child answer is never included in a model request.</p></article>
+      <div class="arrow">① → ② → ③</div>
+      <article class="card server"><span class="label">Vercel serverless boundary</span><h2>Verify and validate</h2><ul><li>Judge code → signed HTTP-only cookie</li><li>Validate parent topic + age band</li><li>Strict JSON Schema and output validation</li></ul><p class="small">Malformed or unsafe model output never reaches the canvas.</p></article>
+    </div>
+    <div class="grid arch" style="margin-top:18px; grid-template-columns:1fr 1.2fr 1fr;"><article class="card browser"><span class="label">Always available</span><h2>Preset fallback</h2><p>A complete mission remains usable if network, access code, or model availability fails.</p></article><div class="arrow">④ →</div><article class="card model"><span class="label">OpenAI Responses API</span><h2>GPT-5.6</h2><ul><li>Creates claim, hidden assumption, three clues, parent prompt, uncertainty</li><li>Low reasoning effort + structured output</li><li>Forbidden: grading, scoring, diagnosis, ranking, persuasion, verdicts</li></ul></article></div>
+    <div class="callouts"><div class="callout"><strong>Privacy boundary:</strong> child choices and working answer are browser-session only.</div><div class="callout"><strong>Safety boundary:</strong> schema validation constrains the browser contract.</div><div class="callout"><strong>Reliability boundary:</strong> static mission is not dependent on a paid model call.</div></div>
+    <div class="footer"><span>Actual implementation: static HTML/CSS/JS + Vercel functions</span><span>Optional live GPT-5.6 reviewer demo</span></div>
+  </section>
+
+  <section class="sheet" id="handshake">
+    <div class="eyebrow">Live-request handshake · actual implementation</div><h1>How one live challenge becomes safe material to question.</h1>
+    <p class="dek">The human authorizes a general-topic request. The server validates both access and output. The model never sees the child’s working answer.</p>
+    <div class="swim">
+      <div class="lane"><h3>Parent + child</h3><p>Family activity</p><div class="message bluebox m1"><b>①</b> Parent enters a general topic and age band.</div><div class="message bluebox m7"><b>⑥</b> Family questions the returned material and makes a child-owned answer.</div></div>
+      <div class="lane"><h3>Browser</h3><p>Reasoning canvas</p><div class="message m2"><b>②</b> Sends same-origin request. Child answer stays in session storage.</div><div class="message m6"><b>⑤</b> Renders validated text nodes; preserves static fallback if unavailable.</div></div>
+      <div class="lane"><h3>Vercel function</h3><p>Access + schema guard</p><div class="message orange m3"><b>③</b> Verifies signed judge cookie, validates input, and constructs structured request.</div><div class="message orange m5"><b>④</b> Validates response JSON before returning bounded fields.</div></div>
+      <div class="lane"><h3>GPT-5.6</h3><p>OpenAI Responses API</p><div class="message m4"><b>③a</b> Prepares claim, assumption, clues, parent prompt, and uncertainty—not a recommendation or grade.</div></div>
+    </div>
+    <div class="footer"><span>Only a parent’s general topic and age band cross the model boundary.</span><span>Static MissionPack remains complete without live access.</span></div>
+  </section>
+
+  <section class="sheet" id="future-agents">
+    <div class="future">FUTURE ROADMAP · NOT THE CURRENT RUNTIME</div><div class="eyebrow">Validated MissionPack workflow</div><h1>A future GPT-5.6 manager flow, with a human-safe release gate.</h1><p class="dek">The shipped demo uses one structured GPT-5.6 call. This proposed server-side Agents SDK topology expands content preparation without changing the browser’s safety boundary.</p><div class="rule"></div>
+    <div class="topology"><article class="card director"><span class="label" style="color:var(--gold)">Hierarchical manager</span><h2>Mission Director</h2><p>Coordinates specialist drafts, enforces the non-judgmental brief, and sends only a validated MissionPack to the renderer.</p></article><div class="arrow">→</div><div class="fan"><article class="card"><span class="label">Specialist 1</span><h3>Inquiry Designer</h3><p>Drafts claim, child choice prompts, and Make scaffold.</p></article><article class="card"><span class="label">Specialist 2</span><h3>Skeptic</h3><p>Finds hidden assumption, counter-perspective, and reasoning challenge.</p></article><article class="card"><span class="label">Specialist 3</span><h3>Evidence Guardian</h3><p>Checks source-aware evidence cards and uncertainty bounds.</p></article></div></div>
+    <div class="bottom-row"><div class="card server"><span class="label">Deterministic release gate</span><h2>MissionPack validator</h2><ul><li>Schema and age/reading-level checks</li><li>Provenance and evidence requirements</li><li>Reject scoring, diagnosis, persuasion, and answer judgment</li><li>Apply human-reviewed editorial rules</li></ul></div><div class="note"><strong>Important distinction</strong><br />This is the documented next step, not a claim about today’s runtime. The current browser already receives only schema-validated material and retains a bundled fallback.</div></div>
+    <div class="footer"><span>Fan-out specialists → validation → static canvas renderer</span><span>Future server-side GPT-5.6 Agents SDK architecture</span></div>
+  </section>
+</body>
+</html>

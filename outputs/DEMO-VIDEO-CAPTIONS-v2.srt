@@ -1,0 +1,64 @@
+1
+00:00:00,000 --> 00:00:21,864
+GPT-5.6 prepares a claim, hidden assumption, clues,
+and uncertainty for families to question together.
+
+2
+00:00:21,864 --> 00:00:33,864
+AI can give a child a confident answer in seconds.
+Did they learn to think with it—or accept it?
+
+3
+00:00:33,864 --> 00:00:45,864
+Before You Believe It turns a weekend AI moment
+into a small parent-and-child practice.
+
+4
+00:00:45,864 --> 00:00:57,864
+The child chooses what makes them pause.
+That question—not the model—sets the direction.
+
+5
+00:00:57,864 --> 00:01:09,864
+Push Back names the hidden assumption
+inside a confident AI-style claim.
+
+6
+00:01:09,864 --> 00:01:21,864
+Check connects a clue or another view—not a verdict—
+and keeps uncertainty visible.
+
+7
+00:01:21,864 --> 00:01:33,864
+Make and Own keep the child’s working answer local.
+The Learning Receipt separates contributions.
+
+8
+00:01:33,864 --> 00:01:45,864
+The activity has no points, answer key, or model verdict.
+Parents can see the reasoning moves; children lead the question.
+
+9
+00:01:45,864 --> 00:01:52,864
+Recording pauses here while the real GPT-5.6 request runs.
+Generation time is never faked.
+
+10
+00:01:52,864 --> 00:02:07,864
+GPT-5.6 returns a claim, assumption, clues,
+parent prompt, and an uncertainty to explore.
+
+11
+00:02:07,864 --> 00:02:21,864
+It never grades, diagnoses, ranks, recommends,
+or decides what a child should believe.
+
+12
+00:02:21,864 --> 00:02:35,864
+Codex helped build and test the canvas.
+Signed access and schema validation protect the GPT-5.6 boundary.
+
+13
+00:02:35,864 --> 00:02:42,456
+AI prepares material to question.
+The family does the reasoning.
