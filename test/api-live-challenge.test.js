@@ -90,3 +90,30 @@ test('preview-only capture bypass skips judge-cookie enforcement but still requi
   assert.equal(response.statusCode, 503);
   assert.equal(response.body.error, 'Live GPT is unavailable. The preset mission is ready to use.');
 });
+
+test('production capture bypass skips judge-cookie enforcement but still requires live GPT configuration', async (t) => {
+  const previousToken = process.env.DEMO_ACCESS_TOKEN;
+  const previousKey = process.env.OPENAI_API_KEY;
+  const previousEnvironment = process.env.VERCEL_ENV;
+  const previousBypass = process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
+  delete process.env.DEMO_ACCESS_TOKEN;
+  delete process.env.OPENAI_API_KEY;
+  process.env.VERCEL_ENV = 'production';
+  process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = 'true';
+  t.after(() => {
+    if (previousToken === undefined) delete process.env.DEMO_ACCESS_TOKEN;
+    else process.env.DEMO_ACCESS_TOKEN = previousToken;
+    if (previousKey === undefined) delete process.env.OPENAI_API_KEY;
+    else process.env.OPENAI_API_KEY = previousKey;
+    if (previousEnvironment === undefined) delete process.env.VERCEL_ENV;
+    else process.env.VERCEL_ENV = previousEnvironment;
+    if (previousBypass === undefined) delete process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
+    else process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = previousBypass;
+  });
+
+  const response = createResponse();
+  await liveChallengeHandler({ method: 'POST', headers: {}, body: { topic: 'School gardens', ageBand: '8-10' } }, response);
+
+  assert.equal(response.statusCode, 503);
+  assert.equal(response.body.error, 'Live GPT is unavailable. The preset mission is ready to use.');
+});

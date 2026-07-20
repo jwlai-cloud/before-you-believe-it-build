@@ -8,13 +8,13 @@ The optional live reviewer demo uses `gpt-5.6` through the OpenAI Responses API.
 
 1. [`live-challenge.js`](../live-challenge.js) builds the request with `model: 'gpt-5.6'`, `reasoning: { effort: 'low' }`, and strict JSON Schema output.
 2. The developer instruction prohibits grading, scoring, diagnosis, ranking, persuasion, answer judgment, personal-data requests, and invented citations.
-3. [`api/live-challenge.js`](../api/live-challenge.js) checks signed judge access before making any model request.
+3. [`api/live-challenge.js`](../api/live-challenge.js) checks signed judge access before making any model request by default; capture bypasses are explicit and documented below.
 4. The response is schema-validated again before the browser renders it. A malformed result is rejected; [`app.js`](../app.js) renders only validated text nodes.
 5. The child’s selected question, evidence choice, and working answer stay in session-only browser storage and are never sent to GPT-5.6.
 
 The static Floating City `MissionPack` remains fully usable if the model, access code, or network is unavailable. That makes the live path an honest enhancement rather than a prerequisite for the educational experience.
 
-For a time-limited recording only, the server supports `BEFORE_YOU_BELIEVE_DEMO_BYPASS=true` when—and only when—Vercel supplies `VERCEL_ENV=preview`. This bypass is inert in Production and does not bypass the API-key requirement. Remove it and redeploy the Preview immediately after capture.
+For a time-limited recording only, the server supports `BEFORE_YOU_BELIEVE_DEMO_BYPASS=true` when—and only when—Vercel supplies `VERCEL_ENV=preview`. If a protected Preview cannot be recorded, `BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS=true` is a separate, explicit Production-only switch. It permits unauthenticated live-generation requests and must be removed with a Production redeploy immediately after capture. Neither switch bypasses the API-key requirement.
 
 ## Codex: development role
 

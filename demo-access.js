@@ -12,6 +12,15 @@ function isPreviewDemoBypassEnabled(environment = process.env) {
     && environment?.BEFORE_YOU_BELIEVE_DEMO_BYPASS === 'true';
 }
 
+function isProductionCaptureBypassEnabled(environment = process.env) {
+  return environment?.VERCEL_ENV === 'production'
+    && environment?.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS === 'true';
+}
+
+function isDemoCaptureBypassEnabled(environment = process.env) {
+  return isPreviewDemoBypassEnabled(environment) || isProductionCaptureBypassEnabled(environment);
+}
+
 function constantTimeEqual(left, right) {
   const leftBuffer = Buffer.from(String(left));
   const rightBuffer = Buffer.from(String(right));
@@ -63,7 +72,9 @@ module.exports = {
   createAccessCookie,
   formatAccessCookie,
   isAuthorizedRequest,
+  isDemoCaptureBypassEnabled,
   isDemoAccessConfigured,
+  isProductionCaptureBypassEnabled,
   isPreviewDemoBypassEnabled,
   verifyAccessCookie
 };

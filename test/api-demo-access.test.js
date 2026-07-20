@@ -56,5 +56,24 @@ test('preview-only capture bypass authorizes access without configuring a judge 
   await demoAccessHandler({ method: 'GET', headers: {} }, response);
 
   assert.equal(response.statusCode, 200);
-  assert.deepEqual(response.body, { authorized: true, capturePreview: true });
+  assert.deepEqual(response.body, { authorized: true, captureBypass: true });
+});
+
+test('production capture bypass authorizes access only with its separate opt-in', async (t) => {
+  const previousEnvironment = process.env.VERCEL_ENV;
+  const previousBypass = process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
+  process.env.VERCEL_ENV = 'production';
+  process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = 'true';
+  t.after(() => {
+    if (previousEnvironment === undefined) delete process.env.VERCEL_ENV;
+    else process.env.VERCEL_ENV = previousEnvironment;
+    if (previousBypass === undefined) delete process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS;
+    else process.env.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS = previousBypass;
+  });
+
+  const response = createResponse();
+  await demoAccessHandler({ method: 'GET', headers: {} }, response);
+
+  assert.equal(response.statusCode, 200);
+  assert.deepEqual(response.body, { authorized: true, captureBypass: true });
 });
