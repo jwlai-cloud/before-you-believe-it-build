@@ -57,8 +57,8 @@ async function refreshLiveMissionAccess() {
     if (!response.ok) throw new Error(payload?.error || 'Live GPT is unavailable.');
     setLiveMissionAccess(Boolean(payload?.authorized));
     setLiveMissionStatus(payload?.authorized
-      ? payload?.capturePreview
-        ? 'Preview capture access is ready. Use a general topic, never a child’s personal information.'
+      ? payload?.captureBypass
+        ? 'Temporary capture access is ready. Use a general topic, never a child’s personal information.'
         : 'Judge access is ready. Use a general topic, never a child’s personal information.'
       : 'Enter the judge access code to prepare a live challenge.');
   } catch {

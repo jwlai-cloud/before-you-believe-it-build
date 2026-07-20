@@ -2,6 +2,7 @@ const crypto = require('node:crypto');
 
 const COOKIE_NAME = 'live_demo_access';
 const ACCESS_DURATION_SECONDS = 60 * 60 * 2;
+let productionCaptureBypassWarningIssued = false;
 
 function isDemoAccessConfigured(token) {
   return typeof token === 'string' && token.length >= 12;
@@ -10,6 +11,20 @@ function isDemoAccessConfigured(token) {
 function isPreviewDemoBypassEnabled(environment = process.env) {
   return environment?.VERCEL_ENV === 'preview'
     && environment?.BEFORE_YOU_BELIEVE_DEMO_BYPASS === 'true';
+}
+
+function isProductionCaptureBypassEnabled(environment = process.env) {
+  const enabled = environment?.VERCEL_ENV === 'production'
+    && environment?.BEFORE_YOU_BELIEVE_PRODUCTION_CAPTURE_BYPASS === 'true';
+  if (enabled && environment?.NODE_ENV !== 'test' && !productionCaptureBypassWarningIssued) {
+    console.warn('WARNING: Production capture bypass is active. Unauthenticated live-generation requests are permitted.');
+    productionCaptureBypassWarningIssued = true;
+  }
+  return enabled;
+}
+
+function isDemoCaptureBypassEnabled(environment = process.env) {
+  return isPreviewDemoBypassEnabled(environment) || isProductionCaptureBypassEnabled(environment);
 }
 
 function constantTimeEqual(left, right) {
@@ -63,7 +78,9 @@ module.exports = {
   createAccessCookie,
   formatAccessCookie,
   isAuthorizedRequest,
+  isDemoCaptureBypassEnabled,
   isDemoAccessConfigured,
+  isProductionCaptureBypassEnabled,
   isPreviewDemoBypassEnabled,
   verifyAccessCookie
 };

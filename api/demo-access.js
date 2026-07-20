@@ -3,18 +3,18 @@ const {
   formatAccessCookie,
   isAuthorizedRequest,
   isDemoAccessConfigured,
-  isPreviewDemoBypassEnabled,
+  isDemoCaptureBypassEnabled,
   constantTimeEqual
 } = require('../demo-access.js');
 
 module.exports = async function demoAccess(request, response) {
   const token = process.env.DEMO_ACCESS_TOKEN;
-  if (isPreviewDemoBypassEnabled()) {
+  if (isDemoCaptureBypassEnabled()) {
     if (request.method !== 'GET' && request.method !== 'POST') {
       response.setHeader('Allow', 'GET, POST');
       return response.status(405).json({ error: 'Method not allowed.' });
     }
-    return response.status(200).json({ authorized: true, capturePreview: true });
+    return response.status(200).json({ authorized: true, captureBypass: true });
   }
   if (!isDemoAccessConfigured(token)) {
     return response.status(503).json({ error: 'Live judge access is not configured.' });
