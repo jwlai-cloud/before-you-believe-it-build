@@ -1,0 +1,125 @@
+1
+00:00:00,000 --> 00:00:03,680
+AI can hand a child a confident answer in seconds.
+
+2
+00:00:03,680 --> 00:00:07,680
+The harder skill is the pause before believing it.
+
+3
+00:00:07,680 --> 00:00:12,880
+Before you believe it turns that pause into a five-minute ritual a parent and child do
+
+4
+00:00:12,880 --> 00:00:13,880
+together.
+
+5
+00:00:13,880 --> 00:00:15,800
+A parent enters any topic.
+
+6
+00:00:15,800 --> 00:00:19,840
+Here, electric cars are better for the planet and an age band.
+
+7
+00:00:19,840 --> 00:00:22,879
+The child's own answer never leaves the browser.
+
+8
+00:00:22,879 --> 00:00:29,200
+GPT 5.6, through the OpenAI Responses API, builds a complete reasoning mission in real-time,
+
+9
+00:00:29,200 --> 00:00:33,599
+a claim, the questions worth pausing on, the hidden assumptions, balanced evidence
+
+10
+00:00:33,599 --> 00:00:35,860
+clues, and answer starters.
+
+11
+00:00:35,860 --> 00:00:37,299
+This is a real request.
+
+12
+00:00:37,299 --> 00:00:39,360
+The wait is never faked.
+
+13
+00:00:39,360 --> 00:00:41,400
+Every step now explores that topic.
+
+14
+00:00:41,400 --> 00:00:44,599
+First, the child picks the question that makes them pause.
+
+15
+00:00:44,599 --> 00:00:49,520
+Pushback reveals a hidden assumption inside the claim, the word always doing too much
+
+16
+00:00:49,520 --> 00:00:50,520
+work.
+
+17
+00:00:50,520 --> 00:00:54,759
+Check sets the claim beside evidence clues, not a verdict, and asks what would change
+
+18
+00:00:54,759 --> 00:00:55,959
+their mind.
+
+19
+00:00:55,959 --> 00:00:58,880
+Make lets the child build an answer in their own words.
+
+20
+00:00:58,880 --> 00:01:02,000
+The AI never grades, scores, or ranks it.
+
+21
+00:01:02,000 --> 00:01:06,320
+OWN prints a learning receipt that keeps four things separate — what the child bought,
+
+22
+00:01:06,320 --> 00:01:10,320
+what AI helped with, what they checked, and what is still uncertain.
+
+23
+00:01:10,320 --> 00:01:15,519
+I built this with OpenAI Codex, the accessible canvas, the deterministic mission state and
+
+24
+00:01:15,519 --> 00:01:21,139
+receipt, the signed judge access boundary, the GPT 5.6 schema validation, and the full
+
+25
+00:01:21,139 --> 00:01:22,320
+test suite.
+
+26
+00:01:22,320 --> 00:01:25,300
+GPT 5.6 is the live engine.
+
+27
+00:01:25,300 --> 00:01:30,839
+Every topic reshapes the whole mission, behind server-side access and strict schema validation.
+
+28
+00:01:30,839 --> 00:01:33,459
+And the child's answer is never sent to the model.
+
+29
+00:01:33,459 --> 00:01:35,940
+AI prepares the material to question.
+
+30
+00:01:35,940 --> 00:01:37,580
+The family does the reasoning.
+
+31
+00:01:37,580 --> 00:01:39,419
+That's before you believe it.
+
+

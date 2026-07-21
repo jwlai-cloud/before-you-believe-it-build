@@ -4,7 +4,7 @@ This note maps the submission’s OpenAI claims to the working repository. It is
 
 ## GPT-5.6: runtime role
 
-The optional live reviewer demo uses `gpt-5.6` through the OpenAI Responses API. The model receives only a general parent-supplied topic and age band. It creates bounded challenge material, not an answer for a child:
+The live reviewer demo uses `gpt-5.6` through the OpenAI Responses API. The model receives only a general parent-supplied topic and age band. It builds a complete, schema-bound five-step reasoning mission — material to question, not an answer for a child:
 
 1. [`live-challenge.js`](../live-challenge.js) builds the request with `model: 'gpt-5.6'`, `reasoning: { effort: 'low' }`, and strict JSON Schema output.
 2. The developer instruction prohibits grading, scoring, diagnosis, ranking, persuasion, answer judgment, personal-data requests, and invented citations.
@@ -24,7 +24,7 @@ Codex was used to build and refine the production prototype, including:
 - deterministic state and Learning Receipt transforms in [`mission-state.js`](../mission-state.js);
 - signed, HTTP-only reviewer access in [`demo-access.js`](../demo-access.js);
 - GPT-5.6 request and response validation in [`live-challenge.js`](../live-challenge.js);
-- the 31-test Node suite and Playwright browser smoke test in [`test/`](../test);
+- the 35-test Node suite and Playwright browser smoke test in [`test/`](../test);
 - the deployment, review, and demo artifacts in [`docs/`](.) and [`outputs/`](../outputs).
 
 ## Key decisions

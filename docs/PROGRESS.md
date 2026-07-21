@@ -11,13 +11,13 @@
 - Created the public GitHub repository with protected `main`, a `dev` branch, and a `dev`-only PR validation workflow.
 - Added current-state architecture, ADR, learning, and specification documents.
 - Extracted deterministic mission state into `mission-state.js` using a red-green-refactor test cycle.
-- Expanded the Node unit suite to 31 tests across mission state, the live-challenge schema, and signed access, including malformed restore values, partial answers, neutral defaults, malformed answer fields, and minimal session serialization.
+- Expanded the Node unit suite to 35 tests across mission state, the live-challenge schema, and signed access, including malformed restore values, partial answers, neutral defaults, malformed answer fields, and minimal session serialization.
 - Added a self-contained Playwright browser smoke test covering the full mission, refresh persistence, reset, copy fallback, reduced motion, console errors, and 320px/768px/1024px/1440px responsive overflow.
 - Captured and reviewed settled browser screenshots at 320px, 768px, 1024px, and 1440px; no visual clipping was found.
 
 ### In progress (not done)
 
-- The public Vercel deployment currently serves `main`, which does not yet contain the optional live GPT functions from `dev`. The static mission is live; the live path needs a `dev` preview deployment after the judge-access update is pushed.
+- Resolved: `main` now carries the live GPT functions and the public Vercel deployment serves them. The live GPT-5.6 path regenerates the full five-step mission from a parent's topic (verified against the deployed frontend).
 
 ### Next (priority order)
 

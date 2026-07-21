@@ -21,7 +21,7 @@ The difference: most "AI + kids" tools make the model the authority. This one de
 
 **GPT-5.6 — the live reasoning engine (runtime).** When a parent submits a topic, a Vercel serverless function calls the OpenAI **Responses API** with `gpt-5.6`. The request is deliberately constrained: `reasoning: { effort: 'low' }`, `max_output_tokens: 1600`, and a strict `json_schema` (`strict: true`) whose fields drive the entire five-step mission — the claim, three pause questions, three claim parts with their hidden assumptions, three evidence clues, three answer scaffolds, a parent prompt, and one remaining uncertainty. A developer instruction forbids grading, scoring, diagnosis, ranking, persuasion, verdicts, invented citations, and any request for personal data. The server verifies a signed, HTTP-only judge cookie before any model call, times out generously, and re-validates the model's JSON against the schema before the browser renders it as **text nodes only** — never injected HTML. The child's working answer is never included in the request. GPT-5.6 is what makes the activity endlessly replayable: every topic reshapes the whole Think→Own mission into a genuinely new one to question together.
 
-**Codex — the build partner (development).** Codex was hands-on across the whole build: the accessible Think→Push Back→Check→Make→Own canvas, the deterministic mission-state transitions and Learning Receipt transforms (`mission-state.js`), the signed HTTP-only judge-access boundary (`demo-access.js`), the GPT-5.6 request/response validation (`live-challenge.js`), the 31-test Node suite plus a Playwright browser smoke test, the architecture/ADR docs, and the demo artifacts. I made the product calls — keep the interaction non-judgmental, keep the child's work local, and keep the parent-child conversation (not a model verdict) at the centre.
+**Codex — the build partner (development).** Codex was hands-on across the whole build: the accessible Think→Push Back→Check→Make→Own canvas, the deterministic mission-state transitions and Learning Receipt transforms (`mission-state.js`), the signed HTTP-only judge-access boundary (`demo-access.js`), the GPT-5.6 request/response validation (`live-challenge.js`), the 35-test Node suite plus a Playwright browser smoke test, the architecture/ADR docs, and the demo artifacts. I made the product calls — keep the interaction non-judgmental, keep the child's work local, and keep the parent-child conversation (not a model verdict) at the centre.
 
 See [`docs/OPENAI-BUILD-WEEK-EVIDENCE.md`](../docs/OPENAI-BUILD-WEEK-EVIDENCE.md) for a claim-to-code map for judges.
 
@@ -38,7 +38,7 @@ Guarding a paid model endpoint with no database or auth service. Fix: a private 
 ## Accomplishments that we're proud of
 
 - **Live GPT-5.6, bounded on purpose:** a real model feature that's useful *because* it's constrained — prompts to question, not answers to obey.
-- **31 passing Node unit tests + a Playwright browser smoke test** covering full mission flow, session restore, reset, copy fallback, reduced motion, console errors, and responsive overflow at 320 / 768 / 1024 / 1440px.
+- **35 passing Node unit tests + a Playwright browser smoke test** covering full mission flow, session restore, reset, copy fallback, reduced motion, console errors, and responsive overflow at 320 / 768 / 1024 / 1440px.
 - **Zero child data leaves the browser** — the child's answer is never sent to GPT-5.6.
 - A graceful fallback so the live demo degrades instead of breaking under a flaky network.
 

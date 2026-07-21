@@ -47,7 +47,7 @@ The live baseline is one schema-constrained GPT-5.6 call. A future server-side M
 
 ## Known limitations / non-goals
 
-- One preset mission plus an optional live companion challenge; generated evidence cards are reasoning prompts, not live research citations.
+- One preset mission plus a live GPT-5.6 path that regenerates the full five-step mission from a parent's topic; generated clues are reasoning prompts, not live research citations.
 - No multi-device saving, accounts, or parent dashboard.
 - This stateless demo deliberately does not claim durable rate limiting for access-code attempts or live generations: a signed cookie can be replayed and Vercel function invocations do not share request state. The private judge code and two-hour cookie scope the demo; production use needs durable server-side throttling before exposing paid calls.
 - The browser smoke test covers runtime flow, console errors, responsive overflow, session restore, reset, copy fallback, and reduced motion. A human accessibility review remains valuable before final submission.

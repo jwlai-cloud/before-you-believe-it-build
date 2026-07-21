@@ -1,0 +1,101 @@
+1
+00:00:00,000 --> 00:00:06,240
+AI can hand a child a confident answer in seconds. The harder skill, the one that lasts,
+
+2
+00:00:06,240 --> 00:00:11,600
+is the pause before believing it. Parents worry that easy answers quietly erode a child's
+
+3
+00:00:11,600 --> 00:00:17,680
+independent critical thinking. Before You Believe It turns that worry into a five-minute ritual a
+
+4
+00:00:17,680 --> 00:00:24,480
+parent and child do together. There are no scores, no right answers, and no test. Only a calm space
+
+5
+00:00:24,480 --> 00:00:31,280
+to think out loud, side by side. It starts with a topic. A parent tykes in anything. Here,
+
+6
+00:00:31,280 --> 00:00:36,240
+electric cars are better for the planet, and picks an age band. The child's own answer never
+
+7
+00:00:36,240 --> 00:00:44,400
+leaves the browser. Now the live part. Through the OpenAI Responses API, GPT 5.6 builds a complete
+
+8
+00:00:44,400 --> 00:00:50,959
+reasoning mission in real time. And it reshapes all five steps of the activity. This is a genuine
+
+9
+00:00:50,959 --> 00:00:58,320
+request. We show the real weight. The generation time is never faked. Step one, think. Every step
+
+10
+00:00:58,320 --> 00:01:04,480
+now explores the new topic. The child picks the question that makes them pause. Step two,
+
+11
+00:01:04,480 --> 00:01:10,959
+push back. The canvas reveals a hidden assumption inside the claim. Here, the word always, doing far
+
+12
+00:01:10,959 --> 00:01:17,279
+too much work. Step three, check. It sets the claim beside balanced evidence clues, not a verdict,
+
+13
+00:01:17,279 --> 00:01:23,199
+and asks what would actually change their mind. Step four, make. The child builds an answer in
+
+14
+00:01:23,199 --> 00:01:30,000
+their own words. The AI never grades it, scores it, or ranks it. Step five, own. A learning receipt
+
+15
+00:01:30,000 --> 00:01:35,360
+keeps four things separate. What the child thought, what AI helped with, what they checked,
+
+16
+00:01:35,360 --> 00:01:40,720
+and what is still uncertain. They keep it, and keep the conversation going. The point isn't
+
+17
+00:01:40,720 --> 00:01:46,400
+to prove the AI wrong. It's to practice steering toward better questions, real evidence, and honest
+
+18
+00:01:46,400 --> 00:01:52,080
+uncertainty. And if the model is ever unavailable, a complete bundled mission keeps the activity
+
+19
+00:01:52,080 --> 00:01:59,919
+working. So the demo never breaks. How was it built? With OpenAI Codex, the accessible canvas,
+
+20
+00:01:59,919 --> 00:02:06,400
+the deterministic mission state and receipt, the signed judge access boundary, the GPT 5.6 schema
+
+21
+00:02:06,400 --> 00:02:13,520
+validation, and the full test suite. And GPT 5.6 is the live engine. Every topic reshapes the whole
+
+22
+00:02:13,520 --> 00:02:19,199
+mission behind server-side access and strict schema validation. The child's answer is never
+
+23
+00:02:19,199 --> 00:02:24,240
+sent to the model. AI prepares the material to question. The family does the reasoning.
+
+24
+00:02:24,800 --> 00:02:30,000
+A small habit, practiced together, that helps a child meet a confident answer with a confident
+
+25
+00:02:30,000 --> 00:02:30,800
+question.
+
+
