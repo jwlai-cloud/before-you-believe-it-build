@@ -24,7 +24,7 @@ Codex was used to build and refine the production prototype, including:
 - deterministic state and Learning Receipt transforms in [`mission-state.js`](../mission-state.js);
 - signed, HTTP-only reviewer access in [`demo-access.js`](../demo-access.js);
 - GPT-5.6 request and response validation in [`live-challenge.js`](../live-challenge.js);
-- the 25-test Node suite and Playwright browser smoke test in [`test/`](../test);
+- the 31-test Node suite and Playwright browser smoke test in [`test/`](../test);
 - the deployment, review, and demo artifacts in [`docs/`](.) and [`outputs/`](../outputs).
 
 ## Key decisions

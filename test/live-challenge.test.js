@@ -10,14 +10,33 @@ const {
 const validChallenge = {
   topic: 'School gardens',
   claim: 'Every school should turn its oval into a food garden because gardens always help students and nature.',
-  pause_question: 'What would need to be true for “always help” to make sense?',
-  assumption_label: '“Every school” faces the same conditions.',
-  assumption_note: 'Schools can have different space, water, time, budgets and community needs.',
-  evidence_cards: [
-    { label: 'SYSTEMS CLUE', title: 'Gardens need care', detail: 'A garden needs water, tools, time and people to look after it.' },
-    { label: 'ANOTHER VIEW', title: 'Space can be shared', detail: 'A school oval can be used for sport, play, shade or growing food.' },
-    { label: 'QUESTION', title: 'Helpful for whom?', detail: 'Different students and families may value different uses of the space.' }
+  claim_label: 'Gardens always help',
+  pause_questions: [
+    'What would need to be true for “always help” to make sense?',
+    'Who would look after the garden over the holidays?',
+    'What else could the same space be used for?'
   ],
+  claim_parts: [
+    { fragment: 'Every school', hint: 'Do all schools have the same space and budget?', assumption_title: 'Every school faces the same conditions.', assumption_note: 'Schools differ in space, water, time, budget and community needs.' },
+    { fragment: 'always help', hint: 'Is “always” doing too much work?', assumption_title: '“Always” leaves no room for trade-offs.', assumption_note: 'A garden can help some goals while costing time or money for others.' },
+    { fragment: 'students and nature', hint: 'Help which students, and how?', assumption_title: 'Every student benefits the same way.', assumption_note: 'Some students may take part while others rarely use the garden.' }
+  ],
+  evidence_cards: [
+    { label: 'SYSTEMS CLUE', title: 'Gardens need care', detail: 'A garden needs water, tools, time and people to look after it.', check_note: 'A garden needs ongoing care, not just planting.' },
+    { label: 'ANOTHER VIEW', title: 'Space can be shared', detail: 'A school oval can be used for sport, play, shade or growing food.', check_note: 'The same space has several possible uses.' },
+    { label: 'QUESTION', title: 'Helpful for whom?', detail: 'Different students and families may value different uses of the space.', check_note: 'People may weigh the benefits differently.' }
+  ],
+  answer_openings: [
+    'I’m not sure a school garden always helps because…',
+    'A school garden could help in some ways, but…',
+    'I would need more information before I said…'
+  ],
+  answer_reasons: [
+    'it needs steady care that someone has to give.',
+    '“always” ignores schools with different needs.',
+    'the space could serve other useful purposes too.'
+  ],
+  default_question: 'Who would care for it, and who might miss out?',
   parent_prompt: 'What would we want to learn before deciding?',
   uncertainty: 'Which choice would be fairest for this particular school?'
 };

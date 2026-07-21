@@ -25,7 +25,7 @@ Before You Believe It is a 5–7 minute parent-and-child reasoning activity with
 2. For a live demo, a reviewer enters a server-configured judge code. The same-origin function issues a signed, HTTP-only cookie valid for two hours.
 3. An authorized parent submits a general topic and age band to the same-origin Vercel function. The child’s answer is never sent.
 4. The function calls GPT-5.6 through the Responses API with a strict JSON schema; malformed output is rejected before the browser receives it.
-5. `app.js` renders the live claim, assumption, clues, parent prompt, and uncertainty using DOM text nodes. If live GPT fails, the preset mission remains usable.
+5. `app.js` reshapes all five mission stages (claim, pause questions, claim parts and assumptions, evidence clues, and answer scaffolds) from the validated challenge using DOM text nodes. If live GPT fails, the preset mission remains usable.
 6. The child selects a question and an evidence clue; `app.js` updates the visual trail and working answer.
 7. The browser stores only the current stage, selected values, and answer in `sessionStorage` for the active browser session; derived receipt text is rebuilt locally on restore.
 8. The Own stage assembles a Learning Receipt from those values and allows copying or printing it. Starting over clears session-only state.
