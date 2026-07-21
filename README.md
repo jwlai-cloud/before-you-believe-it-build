@@ -6,12 +6,12 @@ The aim is not to prove AI wrong. It is to help a child pause, spot an assumptio
 
 ## What it does
 
-- Runs a complete, bundled Floating City mission without a login, API key, or network request.
-- Keeps the child’s question, clue choice, working answer, and Learning Receipt in browser session storage only.
-- Separates child contribution, AI help, evidence considered, uncertainty, and a parent’s next question.
-- Offers an optional live GPT‑5.6 challenge: a parent submits only a general topic and age band, and receives bounded material to question together.
+- **Live GPT‑5.6 challenge:** a parent submits a general topic and age band, and GPT‑5.6 prepares a fresh claim, hidden assumption, three clues, a parent prompt, and an uncertainty to question together — bounded material, never a verdict.
+- Walks one claim through **Think → Push Back → Check → Make → Own**, keeping the child’s contribution, AI’s help, the evidence considered, and what is still uncertain visibly separate.
+- Keeps the child’s question, clue choice, working answer, and Learning Receipt in browser session storage only — the child’s answer is never sent to the model.
+- A bundled Floating City mission keeps the activity working if the model is momentarily unavailable, so a live demo never breaks.
 
-GPT‑5.6 prepares a claim, hidden assumption, three clues, a parent prompt, and uncertainty. It never receives the child’s answer and is instructed not to grade, score, diagnose, rank, persuade, recommend, or decide what a child should believe.
+GPT‑5.6 never receives the child’s answer and is instructed not to grade, score, diagnose, rank, persuade, recommend, or decide what a child should believe.
 
 ## Run locally
 
@@ -35,7 +35,7 @@ playwright install chromium
 npm run test:browser
 ```
 
-## Optional live GPT‑5.6
+## Live GPT‑5.6
 
 The live route is served by Vercel. Configure these server-side environment variables:
 
@@ -45,7 +45,7 @@ DEMO_ACCESS_TOKEN=use-a-unique-16-character-or-longer-value
 OPENAI_MODEL=gpt-5.6
 ```
 
-The browser never receives the API key or access token. A signed HTTP-only cookie authorizes the optional live route; the static mission remains fully usable when live generation is unavailable.
+The browser never receives the API key or access token. A signed HTTP-only cookie authorizes the live route; the bundled mission remains fully usable when live generation is unavailable.
 
 ## How we collaborated with Codex
 
@@ -55,6 +55,17 @@ Codex was a hands-on build partner throughout the project, while the product own
 - **Design decisions:** Codex helped implement the responsive two-dimensional canvas, persistent five-step path, evidence links, purposeful motion, and child-owned Learning Receipt. The product owner directed the visual tone and purpose-led interaction.
 - **Engineering decisions:** Codex accelerated the static MissionPack, deterministic state model, accessibility work, session-only receipt, test suite, signed server boundary, and GPT‑5.6 schema validation. Together we chose to keep child work local and preserve a reliable static fallback.
 - **Quality loop:** Codex helped run structural, unit, and browser checks, prepare reviewable artifacts, and address scoped code-review feedback. The product owner reviewed trade-offs and approved the live path.
+
+## How GPT‑5.6 is used (runtime)
+
+The optional live reviewer path calls **`gpt-5.6`** through the OpenAI **Responses API**. It receives only a parent-supplied topic and age band—never the child's working answer—and prepares bounded material *to question*, not an answer to obey:
+
+- Request: `reasoning: { effort: 'low' }`, `max_output_tokens: 900`, and a strict `json_schema` (`strict: true`) with eight required fields including exactly three evidence cards (`live-challenge.js`).
+- A developer instruction forbids grading, scoring, diagnosis, ranking, persuasion, verdicts, invented citations, and any request for personal data.
+- The server verifies a signed, HTTP-only judge cookie before any model request, applies a 15-second timeout, and re-validates the model output against the schema before the browser renders it as text nodes only (`api/live-challenge.js`, `app.js`).
+- If the model, network, or access code is unavailable, the complete static Floating City `MissionPack` remains fully usable.
+
+See [`docs/OPENAI-BUILD-WEEK-EVIDENCE.md`](docs/OPENAI-BUILD-WEEK-EVIDENCE.md) for a claim-to-code map for judges.
 
 ## Project structure
 
