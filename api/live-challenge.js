@@ -1,5 +1,6 @@
 const { requestLiveChallenge, validateLiveChallengeInput } = require('../live-challenge.js');
 const { isAuthorizedRequest, isDemoAccessConfigured, isDemoCaptureBypassEnabled } = require('../demo-access.js');
+const { checkRateLimit, clientKey } = require('../rate-limit.js');
 
 module.exports = async function liveChallenge(request, response) {
   if (request.method !== 'POST') {
@@ -16,6 +17,11 @@ module.exports = async function liveChallenge(request, response) {
     }
     if (!captureBypass && !isAuthorizedRequest(request, demoToken)) {
       return response.status(401).json({ error: 'Judge access is required to prepare a live challenge.' });
+    }
+    const rate = checkRateLimit(clientKey(request));
+    if (!rate.allowed) {
+      response.setHeader('Retry-After', String(rate.retryAfter));
+      return response.status(429).json({ error: 'Too many live requests. Please wait a moment before trying another topic.' });
     }
     const challenge = await requestLiveChallenge({
       ...input,

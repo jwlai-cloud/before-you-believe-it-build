@@ -201,10 +201,16 @@ def run_browser_checks(base_url):
         assert "School gardens" in page.locator("#receipt-title").inner_text()
         assert "fairest for this particular school" in page.locator("#receipt-uncertain").inner_text()
 
-        # Starting over keeps the live topic and clears selections.
+        # Starting over re-applies the live topic in memory (still on the topic mission).
         page.locator("#restart").click()
         assert page.locator("[data-stage='0']").is_visible()
         assert "food garden" in page.locator("#claim-text").inner_text()
+        assert page.locator("[data-think].selected").count() == 0
+
+        # A full reload returns to the clean preset — no mixed preset/live state.
+        page.reload(wait_until="networkidle")
+        page.wait_for_function("document.querySelector('#claim-text').textContent.includes('Floating cities')")
+        assert page.locator("[data-stage='0']").is_visible()
         assert page.locator("[data-think].selected").count() == 0
         context.unroute("**/api/live-challenge")
 

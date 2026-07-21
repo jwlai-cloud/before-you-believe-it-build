@@ -1,7 +1,7 @@
 const AGE_BANDS = new Set(['8-10', '11-13']);
 const MAX_TOPIC_LENGTH = 80;
 const MAX_TEXT_LENGTH = 420;
-const LIVE_CHALLENGE_TIMEOUT_MS = 30_000;
+const LIVE_CHALLENGE_TIMEOUT_MS = 25_000;
 
 const challengeSchema = {
   type: 'object',

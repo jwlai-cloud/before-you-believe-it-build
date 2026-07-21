@@ -1,5 +1,5 @@
 const fs = require('fs');
-const required = ['index.html', 'styles.css', 'app.js', 'live-challenge.js', 'demo-access.js', 'api/demo-access.js', 'api/live-challenge.js', 'README.md'];
+const required = ['index.html', 'styles.css', 'app.js', 'live-challenge.js', 'demo-access.js', 'rate-limit.js', 'api/demo-access.js', 'api/live-challenge.js', 'README.md'];
 for (const file of required) {
   if (!fs.existsSync(file)) throw new Error(`Missing ${file}`);
 }

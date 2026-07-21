@@ -15,7 +15,6 @@ const liveMissionForm = document.querySelector('#live-mission-form');
 const judgeAccessForm = document.querySelector('#judge-access-form');
 const judgeAccessSubmit = document.querySelector('#judge-access-submit');
 const liveMissionStatus = document.querySelector('#live-mission-status');
-const liveMissionResult = document.querySelector('#live-mission-result');
 const liveMissionSubmit = document.querySelector('#live-mission-submit');
 const storageKey = 'before-you-believe-it:floating-city';
 const stageLabels = ['Meet the claim', 'Find the hidden assumption', 'Compare evidence', 'Build your answer', 'Read your receipt'];
@@ -33,6 +32,9 @@ function loadProgress() {
 }
 
 function saveProgress() {
+  // ponytail: a live-topic mission lives only in memory; skip persistence so a
+  // reload returns to the clean preset instead of a mixed preset/live state.
+  if (activePack) return;
   try {
     sessionStorage.setItem(storageKey, JSON.stringify(serialiseMissionState(state)));
   } catch {
@@ -83,6 +85,8 @@ function makeOption(value) {
 // reset the flow to a fresh start so the whole activity explores the new topic.
 function applyMissionPack(challenge) {
   activePack = challenge;
+  // Clear saved preset progress so a reload after a live topic yields a clean preset.
+  try { sessionStorage.removeItem(storageKey); } catch { /* storage is optional */ }
 
   // Stage 0 — Think: the claim and the "what makes you pause?" choices.
   setText('#claim-text', `“${challenge.claim}”`);
@@ -275,7 +279,9 @@ document.querySelectorAll('[data-evidence]').forEach((card) => card.addEventList
   const checkNote = document.querySelector('#check-note');
   const evidencePath = document.querySelector('#evidence-path');
   if (checkNote) checkNote.textContent = `Linked: ${state.evidence}`;
-  evidencePath?.animate([{ opacity: .15, strokeDashoffset: 30 }, { opacity: 1, strokeDashoffset: 0 }], { duration: 520, easing: 'ease-out' });
+  if (!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+    evidencePath?.animate([{ opacity: .15, strokeDashoffset: 30 }, { opacity: 1, strokeDashoffset: 0 }], { duration: 520, easing: 'ease-out' });
+  }
   saveProgress();
 }));
 
@@ -324,7 +330,6 @@ liveMissionForm?.addEventListener('submit', async (event) => {
     return;
   }
   if (liveMissionSubmit) liveMissionSubmit.disabled = true;
-  if (liveMissionResult) liveMissionResult.hidden = true;
   setLiveMissionStatus('GPT-5.6 is preparing challenge material…');
   try {
     const response = await fetch('/api/live-challenge', {
