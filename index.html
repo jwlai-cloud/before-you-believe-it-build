@@ -67,7 +67,7 @@
             </aside>
             <section class="claim-board" aria-label="AI claim">
               <div class="ai-stamp"><span aria-hidden="true">✦</span> AI helper’s draft</div>
-              <blockquote>“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
+              <blockquote id="claim-text">“Floating cities are better for the planet because they leave all the land below untouched.”</blockquote>
               <div class="claim-footer"><span>PLAUSIBLE, BUT UNPROVEN</span><span class="curve-arrow" aria-hidden="true">↘</span></div>
             </section>
             <fieldset class="choice-fieldset">
@@ -144,7 +144,7 @@
               <h3>“Untouched” means no effects at all.</h3>
               <p>But a city can cast shade, need anchors, and send waste somewhere — even if it floats.</p>
             </aside>
-            <div class="parent-prompt"><span aria-hidden="true">↳</span><p><strong>Parent nudge:</strong> “What would have to be true for this sentence to work?”</p></div>
+            <div class="parent-prompt"><span aria-hidden="true">↳</span><p><strong>Parent nudge:</strong> <span id="push-parent-prompt">“What would have to be true for this sentence to work?”</span></p></div>
           </section>
 
           <section class="stage" data-stage="2" aria-labelledby="check-title" tabindex="-1" hidden>
@@ -153,7 +153,7 @@
               <p class="lede">These are clues, not a verdict. Which one changes your thinking?</p>
             </div>
             <div class="evidence-workspace">
-              <article class="mini-claim"><p class="eyebrow">THE CLAIM</p><strong>“Better for the planet.”</strong><span>?</span></article>
+              <article class="mini-claim"><p class="eyebrow">THE CLAIM</p><strong id="mini-claim-text">“Better for the planet.”</strong><span>?</span></article>
               <div class="evidence-cards">
                 <button class="evidence-card chosen" type="button" data-evidence="A floating platform needs materials, energy and maintenance — each has environmental impacts."><span class="evidence-type">SYSTEMS CLUE</span><h3>Floating does not mean impact-free.</h3><p>Platforms still need energy, materials and repairs.</p><span class="use-clue">This helps me check the claim <b>↗</b></span></button>
                 <button class="evidence-card" type="button" data-evidence="A city can affect the people and ecosystems around it even when it is built above the ground."><span class="evidence-type rust">ANOTHER VIEW</span><h3>“Untouched” can hide who is affected.</h3><p>Air, shade, access and waste can travel beyond a city’s edge.</p><span class="use-clue">This changes the word “all” <b>↗</b></span></button>
@@ -187,12 +187,12 @@
           <section class="stage" data-stage="4" aria-labelledby="own-title" tabindex="-1" hidden>
             <div class="receipt-heading"><p class="kicker">Own the trail</p><h2 id="own-title">A small record of how<br />you got here.</h2><p class="lede">Keep the ideas separate: what came from you, what AI helped with, and what is still open.</p></div>
             <article class="receipt" aria-label="Learning receipt">
-              <div class="receipt-top"><span class="brand-mark small" aria-hidden="true">?</span><div><p class="eyebrow">LEARNING RECEIPT</p><strong>The floating city question</strong></div><time datetime="2026-07-18">WEEKEND MISSION</time></div>
+              <div class="receipt-top"><span class="brand-mark small" aria-hidden="true">?</span><div><p class="eyebrow">LEARNING RECEIPT</p><strong id="receipt-title">The floating city question</strong></div><time datetime="2026-07-18">WEEKEND MISSION</time></div>
               <dl>
                 <div><dt>YOU CONTRIBUTED</dt><dd id="receipt-think">A question about whether the land would really be untouched.</dd></div>
                 <div><dt>AI HELPED BY</dt><dd>Writing the first claim and offering challenge cards. It did not decide the answer.</dd></div>
                 <div><dt>YOU CHECKED</dt><dd id="receipt-evidence">Floating platforms still need energy, materials and maintenance.</dd></div>
-                <div><dt>STILL UNCERTAIN</dt><dd>Which environmental effects would matter most — and for whom?</dd></div>
+                <div><dt>STILL UNCERTAIN</dt><dd id="receipt-uncertain">Which environmental effects would matter most — and for whom?</dd></div>
               </dl>
               <div class="receipt-answer"><span>YOUR WORKING ANSWER</span><p id="receipt-answer-text">I’m not sure floating cities are automatically better because they still need energy, materials and maintenance.</p></div>
               <div class="receipt-practice" aria-label="What we practised">

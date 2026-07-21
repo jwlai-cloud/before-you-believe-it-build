@@ -31,3 +31,7 @@ module.exports = async function liveChallenge(request, response) {
     });
   }
 };
+
+// GPT-5.6 preparing the full mission takes ~15-20s; allow headroom so the
+// serverless function is not killed before the model responds.
+module.exports.config = { maxDuration: 30 };

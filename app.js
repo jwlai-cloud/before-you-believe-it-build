@@ -1,4 +1,4 @@
-const { STAGE_COUNT, defaultAnswer, restoreMissionState, selectEvidence, selectThink, updateAnswer: updateMissionAnswer, resetMissionState, serialiseMissionState, buildWorkingAnswer, receiptFromState } = window.MissionState;
+const { STAGE_COUNT, defaultAnswer, createMissionState, restoreMissionState, selectEvidence, selectThink, updateAnswer: updateMissionAnswer, resetMissionState, serialiseMissionState, buildWorkingAnswer, receiptFromState } = window.MissionState;
 const stages = [...document.querySelectorAll('.stage')];
 const steps = [...document.querySelectorAll('.path-step')];
 const next = document.querySelector('#next');
@@ -21,6 +21,7 @@ const storageKey = 'before-you-believe-it:floating-city';
 const stageLabels = ['Meet the claim', 'Find the hidden assumption', 'Compare evidence', 'Build your answer', 'Read your receipt'];
 const nextLabels = ['Push back', 'Check it', 'Make an answer', 'See receipt', 'Start again'];
 let state = restoreMissionState(loadProgress());
+let activePack = null;
 
 function loadProgress() {
   try {
@@ -72,32 +73,88 @@ function setText(selector, text) {
   if (element) element.textContent = text;
 }
 
-function renderLiveMission(challenge) {
-  setText('#live-topic-label', challenge.topic);
-  setText('#live-claim', `“${challenge.claim}”`);
-  setText('#live-pause-question', challenge.pause_question);
-  setText('#live-assumption-label', challenge.assumption_label);
-  setText('#live-assumption-note', challenge.assumption_note);
-  setText('#live-parent-prompt', challenge.parent_prompt);
-  setText('#live-uncertainty', challenge.uncertainty);
-  const evidenceList = document.querySelector('#live-evidence-list');
-  if (evidenceList) {
-    evidenceList.replaceChildren(...challenge.evidence_cards.map((card) => {
-      const item = document.createElement('li');
-      const label = document.createElement('span');
-      const title = document.createElement('strong');
-      const detail = document.createElement('p');
-      label.textContent = card.label;
-      title.textContent = card.title;
-      detail.textContent = card.detail;
-      item.append(label, title, detail);
-      return item;
-    }));
-  }
-  if (liveMissionResult) {
-    liveMissionResult.hidden = false;
-    liveMissionResult.focus();
-  }
+function makeOption(value) {
+  const option = document.createElement('option');
+  option.textContent = value;
+  return option;
+}
+
+// Rewrite all five mission stages in place from a live GPT-5.6 challenge, then
+// reset the flow to a fresh start so the whole activity explores the new topic.
+function applyMissionPack(challenge) {
+  activePack = challenge;
+
+  // Stage 0 — Think: the claim and the "what makes you pause?" choices.
+  setText('#claim-text', `“${challenge.claim}”`);
+  document.querySelectorAll('[data-think]').forEach((button, index) => {
+    const question = challenge.pause_questions[index];
+    const label = button.querySelectorAll('span')[1];
+    if (label) label.textContent = question;
+    button.dataset.think = question;
+    button.classList.remove('selected');
+    button.setAttribute('aria-pressed', 'false');
+  });
+
+  // Stage 1 — Push back: tappable claim parts, each carrying a hidden assumption.
+  const nextAssumptions = {};
+  document.querySelectorAll('[data-assumption]').forEach((part, index) => {
+    const info = challenge.claim_parts[index];
+    const key = `part-${index}`;
+    part.dataset.assumption = key;
+    const fragment = part.querySelector('span');
+    const hint = part.querySelector('small');
+    if (fragment) fragment.textContent = info.fragment;
+    if (hint) hint.textContent = info.hint;
+    part.classList.toggle('selected', index === 1);
+    nextAssumptions[key] = [info.assumption_title, info.assumption_note];
+  });
+  assumptions = nextAssumptions;
+  const revealed = challenge.claim_parts[1];
+  setText('#assumption-card h3', revealed.assumption_title);
+  const assumptionBody = document.querySelector('#assumption-card p');
+  if (assumptionBody) assumptionBody.textContent = revealed.assumption_note;
+  setText('#push-parent-prompt', challenge.parent_prompt);
+
+  // Stage 2 — Check: the short claim label and three evidence clues.
+  setText('#mini-claim-text', `“${challenge.claim_label}”`);
+  document.querySelectorAll('[data-evidence]').forEach((button, index) => {
+    const card = challenge.evidence_cards[index];
+    button.dataset.evidence = card.check_note;
+    const type = button.querySelector('.evidence-type');
+    const title = button.querySelector('h3');
+    const detail = button.querySelector('p');
+    if (type) type.textContent = card.label;
+    if (title) title.textContent = card.title;
+    if (detail) detail.textContent = card.detail;
+    button.classList.toggle('chosen', index === 0);
+  });
+
+  // Stage 3 — Make: answer-building scaffolds.
+  document.querySelector('#opening')?.replaceChildren(...challenge.answer_openings.map(makeOption));
+  document.querySelector('#reason')?.replaceChildren(...challenge.answer_reasons.map(makeOption));
+
+  // Stage 4 — Own: receipt title and the remaining uncertainty.
+  setText('#receipt-title', `The ${challenge.topic} question`);
+  setText('#receipt-uncertain', challenge.uncertainty);
+
+  // Fresh start for the new topic.
+  const firstCheck = challenge.evidence_cards[0].check_note;
+  state = createMissionState({
+    thinking: `A question worth pausing on about ${challenge.topic}.`,
+    evidence: firstCheck,
+    evidenceChoice: firstCheck,
+    answer: {
+      opening: challenge.answer_openings[0],
+      reason: challenge.answer_reasons[0],
+      question: challenge.default_question
+    }
+  });
+  setAnswerValues(state.answer);
+  setText('#think-note', 'Choose the question that pulls at you.');
+  setText('#check-note', 'A first clue is already linked. You can compare the others too.');
+  restoreSelections();
+  updateAnswerPreview();
+  showStage(0);
 }
 
 function setAnswerValues(answer) {
@@ -171,6 +228,10 @@ function showStage(index, focus = true) {
 
 function resetMission() {
   try { sessionStorage.removeItem(storageKey); } catch { /* no saved mission to clear */ }
+  if (activePack) {
+    applyMissionPack(activePack);
+    return;
+  }
   state = resetMissionState();
   setAnswerValues(defaultAnswer);
   const thinkNote = document.querySelector('#think-note');
@@ -193,7 +254,7 @@ document.querySelectorAll('[data-think]').forEach((choice) => choice.addEventLis
   saveProgress();
 }));
 
-const assumptions = {
+let assumptions = {
   surface: ['“Floating” is simple.', 'It could still need anchors, routes, and a safe place in the sky.'],
   untouched: ['“Untouched” means no effects at all.', 'But a city can cast shade, need anchors, and send waste somewhere — even if it floats.'],
   better: ['“Better” means the same thing to everyone.', 'People may care about different things: climate, wildlife, fairness, cost, or home.']
@@ -279,8 +340,8 @@ liveMissionForm?.addEventListener('submit', async (event) => {
       return;
     }
     if (!response.ok || !payload?.challenge) throw new Error(payload?.error || 'Live GPT is unavailable.');
-    renderLiveMission(payload.challenge);
-    setLiveMissionStatus('Live challenge ready. These are clues to explore, not a verdict.');
+    applyMissionPack(payload.challenge);
+    setLiveMissionStatus(`Live mission ready — every step now explores “${payload.challenge.topic}”. Start at Think above.`);
   } catch (error) {
     setLiveMissionStatus(error.message || 'Live GPT is unavailable right now. The preset mission is ready to use.', true);
   } finally {

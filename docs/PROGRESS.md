@@ -11,7 +11,7 @@
 - Created the public GitHub repository with protected `main`, a `dev` branch, and a `dev`-only PR validation workflow.
 - Added current-state architecture, ADR, learning, and specification documents.
 - Extracted deterministic mission state into `mission-state.js` using a red-green-refactor test cycle.
-- Expanded the Node unit suite to 11 tests, including malformed restore values, partial answers, neutral defaults, malformed answer fields, and minimal session serialization.
+- Expanded the Node unit suite to 31 tests across mission state, the live-challenge schema, and signed access, including malformed restore values, partial answers, neutral defaults, malformed answer fields, and minimal session serialization.
 - Added a self-contained Playwright browser smoke test covering the full mission, refresh persistence, reset, copy fallback, reduced motion, console errors, and 320px/768px/1024px/1440px responsive overflow.
 - Captured and reviewed settled browser screenshots at 320px, 768px, 1024px, and 1440px; no visual clipping was found.
 
